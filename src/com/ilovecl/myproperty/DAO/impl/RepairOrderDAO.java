@@ -3,6 +3,8 @@
  */
 package com.ilovecl.myproperty.DAO.impl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -76,6 +78,23 @@ public class RepairOrderDAO extends HibernateDaoSupport implements
 			log.error("findById(Integer id) failed", re);
 			throw re;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RepairOrder> findByProblemDescription(String problemDescription) {
+		List<RepairOrder> repairOrders;
+		try {
+			String queryString = "from RepairOrder as model where model."
+					+ "problemDescription" + "= ?";
+			repairOrders = (List<RepairOrder>) getHibernateTemplate()
+					.find(queryString, problemDescription);
+		} catch (RuntimeException re) {
+			log.error("findByUserName failed", re);
+			throw re;
+		}
+
+		return repairOrders;
 	}
 
 }

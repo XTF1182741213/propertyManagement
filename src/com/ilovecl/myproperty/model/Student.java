@@ -11,7 +11,7 @@ package com.ilovecl.myproperty.model;
  *         对应的数据库建表命令为 create table `Student` ( `userId` int not null primary
  *         key auto_increment, `userName` varchar(20) not null, `password`
  *         varchar(20) not null, `phoneNumber` long, `email` varchar(100),
- *         `sexual` varchar(10));
+ *         `sexual` varchar(10)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  */
 
 public class Student {

@@ -3,6 +3,8 @@
  */
 package com.ilovecl.myproperty.DAO;
 
+import java.util.List;
+
 import com.ilovecl.myproperty.model.RepairOrder;
 
 /**
@@ -18,4 +20,5 @@ public interface IRepairOrderDAO {
 
 	public abstract RepairOrder findById(java.lang.Integer id);
 
+	public abstract List<RepairOrder> findByProblemDescription(java.lang.String problemDescription);
 }

@@ -12,7 +12,7 @@ package com.ilovecl.myproperty.model;
  * 
  *         create table `PropertyManager` ( `userId` int not null primary key
  *         auto_increment, `userName` varchar(20) not null, `password`
- *         varchar(20) not null);
+ *         varchar(20) not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  */
 public class PropertyManager {
 	private int userId;

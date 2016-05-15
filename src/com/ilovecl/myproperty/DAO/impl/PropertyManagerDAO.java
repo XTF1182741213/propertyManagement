@@ -95,8 +95,8 @@ public class PropertyManagerDAO extends HibernateDaoSupport implements
 		try {
 			String queryString = "from PropertyManager as model where model."
 					+ "userName" + "= ?";
-			propertyManagers = (List<PropertyManager>) getHibernateTemplate()
-					.find(queryString, userName);
+			propertyManagers = getHibernateTemplate().find(queryString,
+					userName);
 		} catch (RuntimeException re) {
 			log.error("findByUserName failed", re);
 			throw re;
