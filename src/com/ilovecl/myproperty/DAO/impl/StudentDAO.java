@@ -92,8 +92,7 @@ public class StudentDAO extends HibernateDaoSupport implements IStudentDAO {
 		try {
 			String queryString = "from Student as model where model."
 					+ "userName" + "= ?";
-			students = (List<Student>) getHibernateTemplate().find(queryString,
-					userName);
+			students = getHibernateTemplate().find(queryString, userName);
 		} catch (RuntimeException re) {
 			log.error("findByUserName failed", re);
 			throw re;
@@ -102,4 +101,8 @@ public class StudentDAO extends HibernateDaoSupport implements IStudentDAO {
 		return students;
 	}
 
+	@Override
+	public boolean isStudentExits(String userName) {
+		return findByUserName(userName).size() == 1;
+	}
 }

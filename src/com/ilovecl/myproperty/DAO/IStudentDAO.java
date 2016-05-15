@@ -9,8 +9,9 @@ import com.ilovecl.myproperty.model.Student;
 
 /**
  * DAO层：学生DAO的接口
+ * 
  * @author 邱永臣
- *
+ * 
  */
 public interface IStudentDAO {
 	public abstract void save(Student transientInstance);
@@ -20,5 +21,7 @@ public interface IStudentDAO {
 	public abstract Student findById(java.lang.Integer id);
 
 	public abstract List<Student> findByUserName(java.lang.String userName);
-	
+
+	boolean isStudentExits(String userName);
+
 }

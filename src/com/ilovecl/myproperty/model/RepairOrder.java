@@ -25,7 +25,7 @@ public class RepairOrder {
 	private String problemImage; // 故障物业的现场图片
 	private Date launchDate; // 保修单的上报时间
 	private int order_status; // 保修单状态（0：新提交待查看， 1：已查看待安排检修， 2：检修中， 3：检修完毕，
-								// 4：留空备用， 5：留空备用）
+								// 4：被取消， 5：留空备用）
 
 	/**
 	 * 
@@ -40,7 +40,7 @@ public class RepairOrder {
 		place = place2;
 		problemImage = md5;
 		launchDate = date;
-		order_status = 0;
+		order_status = ORDER_STATUS.NEW;
 	}
 
 	/**

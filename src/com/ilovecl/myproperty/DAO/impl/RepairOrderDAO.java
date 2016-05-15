@@ -87,14 +87,19 @@ public class RepairOrderDAO extends HibernateDaoSupport implements
 		try {
 			String queryString = "from RepairOrder as model where model."
 					+ "problemDescription" + "= ?";
-			repairOrders = (List<RepairOrder>) getHibernateTemplate()
-					.find(queryString, problemDescription);
+			repairOrders = getHibernateTemplate().find(queryString,
+					problemDescription);
 		} catch (RuntimeException re) {
 			log.error("findByUserName failed", re);
 			throw re;
 		}
 
 		return repairOrders;
+	}
+
+	@Override
+	public boolean isRepairOrderExits(int id) {
+		return !(findById(id) == null);
 	}
 
 }
