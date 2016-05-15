@@ -13,4 +13,5 @@ public class ORDER_STATUS {
 	public static final int REPAIRING = 2;
 	public static final int REPAIRED = 3;
 	public static final int CANCELED = 4;
+	public static final int SIGNOFF = 5;
 }

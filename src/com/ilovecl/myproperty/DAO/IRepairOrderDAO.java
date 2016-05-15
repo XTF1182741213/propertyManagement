@@ -8,7 +8,7 @@ import java.util.List;
 import com.ilovecl.myproperty.model.RepairOrder;
 
 /**
- * DAO层：保障订单DAO的接口
+ * DAO层：报修订单DAO的接口
  * 
  * @author 邱永臣
  * 

@@ -36,6 +36,7 @@
 				<value>com/ilovecl/myproperty/model/PropertyManager.hbm.xml</value>
 				<value>com/ilovecl/myproperty/model/RepairOrder.hbm.xml</value>
 				<value>com/ilovecl/myproperty/model/StudentRepairOrder.hbm.xml</value>
+				<value>com/ilovecl/myproperty/model/RemindRepairOrder.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -92,6 +93,13 @@
 		</property>
 	</bean>
 
+	<!-- 将催单DAO托给Spring -->
+	<bean id="remindRepairOrderDAO" class="com.ilovecl.myproperty.DAO.impl.RemindRepairOrderDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
 
 
 	<!-- 注册业务逻辑 -->
@@ -113,7 +121,7 @@
 		</property>
 	</bean>
 
-	<!-- 提交保修单业务逻辑 -->
+	<!-- 提交报修单业务逻辑 -->
 	<bean id="postRepairOrderService" parent="baseTransactionProxy">
 		<property name="target">
 			<bean class="com.ilovecl.myproperty.service.impl.PostRepairOrderService">
@@ -122,7 +130,7 @@
 		</property>
 	</bean>
 
-	<!-- 查看保修单业务逻辑 -->
+	<!-- 查看报修单业务逻辑 -->
 	<bean id="lookUpRepairOrderService" parent="baseTransactionProxy">
 		<property name="target">
 			<bean class="com.ilovecl.myproperty.service.impl.LookUpRepairOrderService">
@@ -132,6 +140,39 @@
 			</bean>
 		</property>
 	</bean>
+
+	<!-- 取消报修单业务逻辑 -->
+	<bean id="cancelRepairOrderService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.ilovecl.myproperty.service.impl.CancelRepairOrderService">
+				<property name="repairOrderDAO" ref="repairOrderDAO" />
+				<property name="studentDAO" ref="studentDAO" />
+				<property name="studentRepairOrderDAO" ref="studentRepairOrderDAO" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 签收报修单业务逻辑 -->
+	<bean id="signOffRepairOrderService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.ilovecl.myproperty.service.impl.SignOffRepairOrderService">
+				<property name="repairOrderDAO" ref="repairOrderDAO" />
+				<property name="studentDAO" ref="studentDAO" />
+				<property name="studentRepairOrderDAO" ref="studentRepairOrderDAO" />
+			</bean>
+		</property>
+	</bean>
+
+
+	<!-- 催单业务逻辑 -->
+	<bean id="remindRepairOrderService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.ilovecl.myproperty.service.impl.RemindRepairOrderService">
+				<property name="remindRepairOrderDAO" ref="remindRepairOrderDAO" />
+			</bean>
+		</property>
+	</bean>
+
 
 
 
@@ -158,11 +199,34 @@
 		<property name="postRepairOrderService" ref="postRepairOrderService" />
 	</bean>
 
-
-	<!-- 查看保修单界面的Action -->
+	<!-- 查看报修单界面的Action -->
 	<bean id="testLookUpStudentRepairOrderAction"
 		class="com.ilovecl.myproperty.struts.action.TestLookUpStudentRepairOrderAction">
 		<property name="lookUpRepairOrderService" ref="lookUpRepairOrderService" />
+	</bean>
+
+	<!-- 取消报修单界面的Action -->
+	<bean id="testCancelRepairOrderAction"
+		class="com.ilovecl.myproperty.struts.action.TestCancelRepairOrderAction">
+		<property name="cancelRepairOrderService" ref="cancelRepairOrderService" />
+	</bean>
+
+	<!-- 签收报修单界面的Action -->
+	<bean id="testSignOffRepairOrderAction"
+		class="com.ilovecl.myproperty.struts.action.TestSignOffRepairOrderAction">
+		<property name="signOffRepairOrderService" ref="signOffRepairOrderService" />
+	</bean>
+
+	<!-- 增加一条催单记录界面的Action -->
+	<bean id="testAddRemindRepairOrderAction"
+		class="com.ilovecl.myproperty.struts.action.TestAddRemindRepairOrderAction">
+		<property name="remindRepairOrderService" ref="remindRepairOrderService" />
+	</bean>
+	
+		<!-- 查阅一条催单记录界面的Action -->
+	<bean id="testLookRemindRepairOrderAction"
+		class="com.ilovecl.myproperty.struts.action.TestLookRemindRepairOrderAction">
+		<property name="remindRepairOrderService" ref="remindRepairOrderService" />
 	</bean>
 
 </beans>
