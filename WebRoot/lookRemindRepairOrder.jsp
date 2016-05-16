@@ -25,7 +25,7 @@
 
 	${requestScope.message}
 
-	<s:form action="testLookRemindRepairOrder" theme="simple"
+	<s:form action="testChangeInfo" theme="simple"
 		enctype="multipart/form-data">
 		<table align="center" width="50%" border="1">
 

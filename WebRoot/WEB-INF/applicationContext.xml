@@ -163,12 +163,20 @@
 		</property>
 	</bean>
 
-
 	<!-- 催单业务逻辑 -->
 	<bean id="remindRepairOrderService" parent="baseTransactionProxy">
 		<property name="target">
 			<bean class="com.ilovecl.myproperty.service.impl.RemindRepairOrderService">
 				<property name="remindRepairOrderDAO" ref="remindRepairOrderDAO" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 学生个人信息管理业务逻辑 -->
+	<bean id="persInfoManagService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="com.ilovecl.myproperty.service.impl.PersInfoManagService">
+				<property name="studentDAO" ref="studentDAO" />
 			</bean>
 		</property>
 	</bean>
@@ -222,11 +230,17 @@
 		class="com.ilovecl.myproperty.struts.action.TestAddRemindRepairOrderAction">
 		<property name="remindRepairOrderService" ref="remindRepairOrderService" />
 	</bean>
-	
-		<!-- 查阅一条催单记录界面的Action -->
+
+	<!-- 查阅一条催单记录界面的Action -->
 	<bean id="testLookRemindRepairOrderAction"
 		class="com.ilovecl.myproperty.struts.action.TestLookRemindRepairOrderAction">
 		<property name="remindRepairOrderService" ref="remindRepairOrderService" />
+	</bean>
+
+	<!-- 修改基本信息界面的Action -->
+	<bean id="testChangeInfoAction"
+		class="com.ilovecl.myproperty.struts.action.TestChangeInfoAction">
+		<property name="persInfoManagService" ref="persInfoManagService" />
 	</bean>
 
 </beans>
