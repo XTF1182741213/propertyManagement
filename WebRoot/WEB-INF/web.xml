@@ -34,7 +34,7 @@
 
 	<!-- 进入WEB应用访问的默认文件 -->
 	<welcome-file-list>
-		<welcome-file>lookRemindRepairOrder.jsp</welcome-file>
+		<welcome-file>studentLogin.jsp</welcome-file>
 	</welcome-file-list>
 
 	<context-param>

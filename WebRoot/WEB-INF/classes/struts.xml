@@ -9,6 +9,11 @@
 
 	<package name="qiuyongchen" extends="struts-default">
 
+
+		<action name="login" class="com.ilovecl.myproperty.struts.action.StudentLoginAction"
+			method="login">
+		</action>
+
 		<action name="register" class="studentRegisterAction">
 			<result name="success">/register.jsp</result>
 			<result name="input">/register.jsp</result>

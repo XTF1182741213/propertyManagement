@@ -3,6 +3,13 @@
  */
 package com.ilovecl.myproperty.struts.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.ilovecl.myproperty.service.ILoginService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,6 +26,21 @@ public class StudentLoginAction extends ActionSupport {
 	private String message;
 
 	private ILoginService loginService;
+
+	public String login() throws IOException {
+		HttpServletResponse resp = ServletActionContext.getResponse();
+		resp.setHeader("pragma", "no-cache");
+		resp.setHeader("cache-control", "no-cache");
+		PrintWriter out = resp.getWriter();
+		if (loginService.studentLogin(userName, password)) {
+			out.print(0);
+
+		} else {
+			out.print(1);
+		}
+		out.flush();
+		return NONE;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -60,7 +82,8 @@ public class StudentLoginAction extends ActionSupport {
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param userName
+	 *            the userName to set
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -74,7 +97,8 @@ public class StudentLoginAction extends ActionSupport {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -88,7 +112,8 @@ public class StudentLoginAction extends ActionSupport {
 	}
 
 	/**
-	 * @param message the message to set
+	 * @param message
+	 *            the message to set
 	 */
 	public void setMessage(String message) {
 		this.message = message;
@@ -102,11 +127,11 @@ public class StudentLoginAction extends ActionSupport {
 	}
 
 	/**
-	 * @param loginService the loginService to set
+	 * @param loginService
+	 *            the loginService to set
 	 */
 	public void setLoginService(ILoginService loginService) {
 		this.loginService = loginService;
 	}
-
 
 }
