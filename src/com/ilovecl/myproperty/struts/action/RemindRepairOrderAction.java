@@ -4,26 +4,24 @@
 package com.ilovecl.myproperty.struts.action;
 
 import java.sql.Date;
-import java.util.List;
 
-import com.ilovecl.myproperty.model.RepairOrder;
-import com.ilovecl.myproperty.model.Student;
-import com.ilovecl.myproperty.model.StudentRepairOrderDetail;
-import com.ilovecl.myproperty.service.ILookUpRepairOrderService;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
+ * 关于催单的Action
+ * 
  * @author 邱永臣
  * 
  */
 @SuppressWarnings("serial")
-public class RepairOrderAction extends ActionSupport {
-	private int id; //
+public class RemindRepairOrderAction extends ActionSupport {
+
+	private int id; // 报修单编号
 	private String problemDescription; // 故障物业的具体描述
 	private String place; // 故障物业的地点
 	private String problemImage; // 故障物业的现场图片
 
-	private Date launchDate; // 保修单的上报时间
+	private Date launchDate; // 报修单的上报时间
 	private String launchDateStr; // 报修单上报时间的字符串表示
 
 	private int order_status; // 保修单状态（0：新提交待查看， 1：已查看待安排检修， 2：检修中， 3：检修完毕，
@@ -34,38 +32,10 @@ public class RepairOrderAction extends ActionSupport {
 
 	private String studentName; // 提交该报修单的学生的名字
 
-	private List<StudentRepairOrderDetail> getdate;
+	private String remindDateStr; // 提交时间的字符串表示
 
-	private ILookUpRepairOrderService lookUpRepairOrderService;
-
-	private RepairOrder repairOrder;
-
-	private Student student;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.opensymphony.xwork2.ActionSupport#execute()
-	 */
-	@Override
-	public String execute() throws Exception {
-		// TODO Auto-generated method stub
-		return super.execute();
-	}
-
-	public String delete() {
-		return SUCCESS;
-	}
-
-	// 查看未完成的报修单（管理员）
-	public String getUnFinishM() {
-		getdate = lookUpRepairOrderService.getAllRepairOrders();
-		return SUCCESS;
-	}
-
-	// 查看已完成的报修单（管理员）
-	public String getFinishM() {
-		getdate = lookUpRepairOrderService.getAllRepairOrders();
+	// 获取所有催单信息（管理员）
+	public String getAllRemindM() {
 		return SUCCESS;
 	}
 
@@ -220,64 +190,18 @@ public class RepairOrderAction extends ActionSupport {
 	}
 
 	/**
-	 * @return the getdate
+	 * @return the remindDateStr
 	 */
-	public List<StudentRepairOrderDetail> getGetdate() {
-		return getdate;
+	public String getRemindDateStr() {
+		return remindDateStr;
 	}
 
 	/**
-	 * @param getdate
-	 *            the getdate to set
+	 * @param remindDateStr
+	 *            the remindDateStr to set
 	 */
-	public void setGetdate(List<StudentRepairOrderDetail> getdate) {
-		this.getdate = getdate;
-	}
-
-	/**
-	 * @return the lookUpRepairOrderService
-	 */
-	public ILookUpRepairOrderService getLookUpRepairOrderService() {
-		return lookUpRepairOrderService;
-	}
-
-	/**
-	 * @param lookUpRepairOrderService
-	 *            the lookUpRepairOrderService to set
-	 */
-	public void setLookUpRepairOrderService(
-			ILookUpRepairOrderService lookUpRepairOrderService) {
-		this.lookUpRepairOrderService = lookUpRepairOrderService;
-	}
-
-	/**
-	 * @return the repairOrder
-	 */
-	public RepairOrder getRepairOrder() {
-		return repairOrder;
-	}
-
-	/**
-	 * @param repairOrder
-	 *            the repairOrder to set
-	 */
-	public void setRepairOrder(RepairOrder repairOrder) {
-		this.repairOrder = repairOrder;
-	}
-
-	/**
-	 * @return the student
-	 */
-	public Student getStudent() {
-		return student;
-	}
-
-	/**
-	 * @param student
-	 *            the student to set
-	 */
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setRemindDateStr(String remindDateStr) {
+		this.remindDateStr = remindDateStr;
 	}
 
 }

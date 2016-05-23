@@ -243,9 +243,31 @@
 		<property name="persInfoManagService" ref="persInfoManagService" />
 	</bean>
 
-	<!-- 修改基本信息界面的Action -->
-	<bean id="repairOrderAction"
-		class="com.ilovecl.myproperty.struts.action.RepairOrderAction"> 
+
+
+	<!-- 报修单信息界面的Action -->
+	<bean id="repairOrderAction" class="com.ilovecl.myproperty.struts.action.RepairOrderAction">
 		<property name="lookUpRepairOrderService" ref="lookUpRepairOrderService" />
 	</bean>
+
+	<!-- 催单信息界面的Action -->
+	<bean id="remindRepairOrderAction"
+		class="com.ilovecl.myproperty.struts.action.RemindRepairOrderAction">
+	</bean>
+
+	<!-- 维修详情信息界面的Action -->
+	<bean id="repairingManagerAction"
+		class="com.ilovecl.myproperty.struts.action.RepairingManagerAction">
+	</bean>
+
+	<!-- 管理学生信息界面的Action -->
+	<bean id="StudentManagerAction"
+		class="com.ilovecl.myproperty.struts.action.StudentManagerAction">
+	</bean>
+
+	<!-- 提交报修单排行界面的Action -->
+	<bean id="studentRankingAction"
+		class="com.ilovecl.myproperty.struts.action.StudentRankingAction">
+	</bean>
+	
 </beans>

@@ -110,7 +110,8 @@ body {
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
 																			class="STYLE3"><a
-																				href="repairOrder_un_getUnFinishM.action" target="mFrame">未完成报修单管理</a></span></td>
+																				href="repairOrder_un_getUnFinishM.action"
+																				target="mFrame">未完成报修单管理</a></span></td>
 																	</tr>
 																</table></td>
 														</tr>
@@ -125,7 +126,8 @@ body {
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
 																			class="STYLE3"> <a
-																				href="house_getHouses.action" target="mFrame">催单管理</a>
+																				href="remindRepairOrder_getAllRemindM.action"
+																				target="mFrame">催单管理</a>
 																		</span></td>
 																	</tr>
 																</table></td>
@@ -140,7 +142,8 @@ body {
 																		<td height="20" style="cursor:hand"
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"> <a href="room_getRooms.action"
+																			class="STYLE3"> <a
+																				href="repairingManagerAction_getAllRepairingManager.action"
 																				target="mFrame">维修安排管理</a></span></td>
 																	</tr>
 																</table></td>
@@ -156,7 +159,8 @@ body {
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
 																			class="STYLE3"><a
-																				href="resi_getResident.action" target="mFrame">学生管理</a></span></td>
+																				href="studentManagerAction_getAllStudents.action"
+																				target="mFrame">学生管理</a></span></td>
 																	</tr>
 																</table></td>
 														</tr>
@@ -170,17 +174,30 @@ body {
 																		<td height="20" style="cursor:hand"
 																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
 																			onmouseout="this.style.borderStyle='none'"><span
-																			class="STYLE3"><a href="pl_getPlant.action"
-																				target="mFrame">已完成报修单管理</a></span></td>
+																			class="STYLE3"><a
+																				href="repairOrder_getFinishM.action" target="mFrame">已完成报修单管理</a></span></td>
 																	</tr>
 																</table></td>
 														</tr>
 														<tr>
-															 
+															<td height="23"><div align="center">
+																	<img src="images/left.gif" width="10" height="10" />
+																</div></td>
+															<td height="23"><table width="95%" border="0"
+																	cellspacing="0" cellpadding="0">
+																	<tr>
+																		<td height="20" style="cursor:hand"
+																			onmouseover="this.style.borderStyle='solid';this.style.borderWidth='1';borderColor='#7bc4d3'; "
+																			onmouseout="this.style.borderStyle='none'"><span
+																			class="STYLE3"><a
+																				href="studentRanking_getAllRanking.action" target="mFrame">提交报修单排名</a></span></td>
+																	</tr>
+																</table></td>
 														</tr>
+
 														<tr>
-															
-															
+
+
 														</tr>
 													</table></td>
 											</tr>

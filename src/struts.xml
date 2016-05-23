@@ -15,16 +15,46 @@
 			method="login">
 		</action>
 
+		<!-- repairingManager -->
+		<action name="studentRanking_*"
+			class="studentRankingAction" method="{1}">
+			<result name="success">adminStudentRanking_ui.jsp</result>
+		</action>
+
+		<!-- repairingManager -->
+		<action name="studentManagerAction_*"
+			class="StudentManagerAction" method="{1}">
+			<result name="success">adminStudentManager_ui.jsp</result>
+		</action>
+
+		<!-- repairingManager -->
+		<action name="repairingManagerAction_*"
+			class="repairingManagerAction" method="{1}">
+			<result name="success">adminRepairingManager_ui.jsp</result>
+		</action>
+
+		<!-- remindRepairOrder -->
+		<action name="remindRepairOrder_*"
+			class="remindRepairOrderAction" method="{1}">
+			<result name="success">adminRemindRepair_ui.jsp</result>
+		</action>
+		
 		<!-- repairOrder -->
-		<action name="repairOrder_un_*"
+		<action name="repairOrder_*"
 			class="repairOrderAction" method="{1}">
-			<result name="success">unFinishRepair_ui.jsp</result>
+			<result name="success">adminFinishRepair_ui.jsp</result>
+		</action>
+		
+		<!-- repairOrder -->
+		<action name="repairOrder_un_getUnFinishM"
+			class="repairOrderAction" method="getUnFinishM">
+			<result name="success">adminUnFinishRepair_ui.jsp</result>
 		</action>
 		
 		<!-- system -->
 		<action name="system_*"
 			class="com.ilovecl.myproperty.struts.action.SystemAction" method="{1}">
-			<result name="success">system_ui.jsp</result>
+			<result name="success">adminSystem_ui.jsp</result>
 		</action>
 
 		<action name="register" class="studentRegisterAction">
