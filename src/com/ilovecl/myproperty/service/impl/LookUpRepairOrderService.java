@@ -3,10 +3,15 @@
  */
 package com.ilovecl.myproperty.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ilovecl.myproperty.DAO.impl.RepairOrderDAO;
 import com.ilovecl.myproperty.DAO.impl.StudentDAO;
 import com.ilovecl.myproperty.DAO.impl.StudentRepairOrderDAO;
 import com.ilovecl.myproperty.model.RepairOrder;
+import com.ilovecl.myproperty.model.Student;
+import com.ilovecl.myproperty.model.StudentRepairOrderDetail;
 import com.ilovecl.myproperty.model.wrapper.RepairOrderWrapper;
 import com.ilovecl.myproperty.model.wrapper.StudentWrapper;
 import com.ilovecl.myproperty.service.ILookUpRepairOrderService;
@@ -47,6 +52,36 @@ public class LookUpRepairOrderService implements ILookUpRepairOrderService {
 		// student.setUserName(studentDAO.findById(studentId).getUserName());
 
 		return true;
+	}
+
+	@Override
+	public List<StudentRepairOrderDetail> getAllUnFinishRepairOrders() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StudentRepairOrderDetail> getAllRepairOrders() {
+		RepairOrder repairOrder = new RepairOrder();
+		Student student = new Student();
+		List<StudentRepairOrderDetail> studentRepairOrderDetails = new ArrayList<>();
+
+		List<RepairOrder> repairOrders = repairOrderDAO
+				.findByExample(repairOrder);
+
+		for (int i = 0; i < repairOrders.size(); i++) {
+			repairOrder = repairOrders.get(i);
+			student = studentDAO.findById(studentRepairOrderDAO
+					.findByRepairOrderId(repairOrder.getId()).get(0).getId());
+
+			studentRepairOrderDetails.add(new StudentRepairOrderDetail(
+					repairOrder.getId(), repairOrder.getProblemDescription(),
+					repairOrder.getPlace(), repairOrder.getProblemImage(),
+					repairOrder.getLaunchDate(), repairOrder.getOrder_status(),
+					student.getUserId(), student.getUserName()));
+		}
+
+		return studentRepairOrderDetails;
 	}
 
 	/**

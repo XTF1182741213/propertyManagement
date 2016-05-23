@@ -11,7 +11,7 @@
 <frameset rows="63,*,23" frameborder="no" border="0" framespacing="0">
   <frame src="top.jsp" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" />
   <frame src="center.jsp" name="mainFrame" id="mainFrame" />
-  <frame src="down.jsp" name="bottomFrame" scrolling="no" noresize="noresize" id="bottomFrame" />
+  <frame src="footer.jsp" name="bottomFrame" scrolling="no" noresize="noresize" id="bottomFrame" />
 </frameset>
 <noframes><body>
 </body>

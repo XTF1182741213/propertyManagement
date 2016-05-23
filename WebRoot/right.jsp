@@ -9,7 +9,7 @@
 
 <frameset rows="60,*" frameborder="no" border="0" framespacing="0">
   <frame src="right_top.jsp" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" />
-  <frame src="com_getCommunity.action" name="mFrame"/>
+  <frame src="system_getIntroduction.action" name="mFrame"/>
 </frameset>
 <noframes><body>
 </body>

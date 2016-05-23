@@ -31,6 +31,7 @@ public class RepairOrderDAO extends HibernateDaoSupport implements
 	public void save(RepairOrder transientInstance) {
 		log.debug("save(RepairOrder transientInstance) in RepairOrderDAO");
 		try {
+			this.getHibernateTemplate().findByExample(transientInstance);
 			this.getHibernateTemplate().saveOrUpdate(transientInstance);
 			log.debug("save(RepairOrder transientInstance) in RepairOrderDAO successful");
 		} catch (RuntimeException re) {
@@ -102,4 +103,21 @@ public class RepairOrderDAO extends HibernateDaoSupport implements
 		return !(findById(id) == null);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RepairOrder> findByExample(RepairOrder repairOrder) {
+		log.debug("findByExample(RepairOrder repairOrder) : "
+				+ repairOrder.getId());
+
+		List<RepairOrder> list;
+		try {
+			list = this.getHibernateTemplate()
+					.find("from RepairOrder as model");
+
+			return list;
+		} catch (RuntimeException re) {
+			log.error("findByExample(RepairOrder repairOrder) failed", re);
+			throw re;
+		}
+	}
 }

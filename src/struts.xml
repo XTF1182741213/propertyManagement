@@ -10,8 +10,21 @@
 	<package name="qiuyongchen" extends="struts-default">
 
 
-		<action name="login" class="com.ilovecl.myproperty.struts.action.StudentLoginAction"
+		<action name="login"
+			class="com.ilovecl.myproperty.struts.action.StudentLoginAction"
 			method="login">
+		</action>
+
+		<!-- repairOrder -->
+		<action name="repairOrder_un_*"
+			class="repairOrderAction" method="{1}">
+			<result name="success">unFinishRepair_ui.jsp</result>
+		</action>
+		
+		<!-- system -->
+		<action name="system_*"
+			class="com.ilovecl.myproperty.struts.action.SystemAction" method="{1}">
+			<result name="success">system_ui.jsp</result>
 		</action>
 
 		<action name="register" class="studentRegisterAction">

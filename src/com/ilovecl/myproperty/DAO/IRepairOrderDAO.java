@@ -20,6 +20,8 @@ public interface IRepairOrderDAO {
 
 	public abstract RepairOrder findById(java.lang.Integer id);
 
+	public abstract List<RepairOrder> findByExample(RepairOrder repairOrder);
+
 	public abstract List<RepairOrder> findByProblemDescription(
 			java.lang.String problemDescription);
 

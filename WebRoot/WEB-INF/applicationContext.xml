@@ -243,4 +243,9 @@
 		<property name="persInfoManagService" ref="persInfoManagService" />
 	</bean>
 
+	<!-- 修改基本信息界面的Action -->
+	<bean id="repairOrderAction"
+		class="com.ilovecl.myproperty.struts.action.RepairOrderAction"> 
+		<property name="lookUpRepairOrderService" ref="lookUpRepairOrderService" />
+	</bean>
 </beans>
