@@ -35,6 +35,11 @@ public class RemindRepairOrderAction extends ActionSupport {
 	private String remindDateStr; // 提交时间的字符串表示
 
 	// 获取所有催单信息（管理员）
+	public String getAllRemindS() {
+		return SUCCESS;
+	}
+
+	// 获取所有催单信息（管理员）
 	public String getAllRemindM() {
 		return SUCCESS;
 	}

@@ -269,5 +269,10 @@
 	<bean id="studentRankingAction"
 		class="com.ilovecl.myproperty.struts.action.StudentRankingAction">
 	</bean>
-	
+
+	<!-- 学生个人信息管理界面的Action -->
+	<bean id="studentInfoManagement"
+		class="com.ilovecl.myproperty.struts.action.StudentInfoManagement">
+		<property name="persInfoManagService" ref="persInfoManagService" />
+	</bean>
 </beans>

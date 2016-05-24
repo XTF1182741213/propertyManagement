@@ -15,47 +15,74 @@
 			method="login">
 		</action>
 
+		<!-- 学生个人信息管理 -->
+		<action name="studentManagerActionGetInfo" class="studentInfoManagement"
+			method="getInfo">
+			<result name="success">studentInfo_ui.jsp</result>
+		</action>
+		
+		<!-- 获取待取消的报修单 -->
+		<action name="repairOrderCancel" class="repairOrderAction"
+			method="getAllToBeCanceled">
+			<result name="success">studentCancel_ui.jsp</result>
+		</action>
+		
+		<!-- 提交报修单 -->
+		<action name="postRepairOrder_*" class="postRepairOrderAction" method="{1}">
+			<result name="success">studentPostRepairOrder_ui.jsp</result>
+			<result name="input">/postRepairOrder.jsp</result>
+			<!-- 定义文件上传拦截器 -->
+			<interceptor-ref name="fileUpload">
+				<!-- 设置文件上传大小 -->
+				<param name="maximumSize">4096000</param>
+			</interceptor-ref>
+			<!-- 自定义了拦截器后必手动定义默认的拦截器，否则默认的拦截器不会被执行 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+
+		</action>
+
 		<!-- repairingManager -->
-		<action name="studentRanking_*"
-			class="studentRankingAction" method="{1}">
+		<action name="studentRanking_*" class="studentRankingAction"
+			method="{1}">
 			<result name="success">adminStudentRanking_ui.jsp</result>
 		</action>
 
 		<!-- repairingManager -->
-		<action name="studentManagerAction_*"
-			class="StudentManagerAction" method="{1}">
+		<action name="studentManagerAction_*" class="StudentManagerAction"
+			method="{1}">
 			<result name="success">adminStudentManager_ui.jsp</result>
 		</action>
 
 		<!-- repairingManager -->
-		<action name="repairingManagerAction_*"
-			class="repairingManagerAction" method="{1}">
+		<action name="repairingManagerAction_*" class="repairingManagerAction"
+			method="{1}">
 			<result name="success">adminRepairingManager_ui.jsp</result>
 		</action>
 
 		<!-- remindRepairOrder -->
-		<action name="remindRepairOrder_*"
-			class="remindRepairOrderAction" method="{1}">
+		<action name="remindRepairOrder_*" class="remindRepairOrderAction"
+			method="{1}">
 			<result name="success">adminRemindRepair_ui.jsp</result>
 		</action>
-		
+
 		<!-- repairOrder -->
-		<action name="repairOrder_*"
-			class="repairOrderAction" method="{1}">
+		<action name="repairOrder_*" class="repairOrderAction" method="{1}">
 			<result name="success">adminFinishRepair_ui.jsp</result>
 		</action>
-		
+
 		<!-- repairOrder -->
-		<action name="repairOrder_un_getUnFinishM"
-			class="repairOrderAction" method="getUnFinishM">
+		<action name="repairOrder_un_getUnFinishM" class="repairOrderAction"
+			method="getUnFinishM">
 			<result name="success">adminUnFinishRepair_ui.jsp</result>
 		</action>
-		
+
 		<!-- system -->
 		<action name="system_*"
 			class="com.ilovecl.myproperty.struts.action.SystemAction" method="{1}">
 			<result name="success">adminSystem_ui.jsp</result>
 		</action>
+
+
 
 		<action name="register" class="studentRegisterAction">
 			<result name="success">/register.jsp</result>
@@ -72,18 +99,7 @@
 			<result name="input">/propertyManagerLogin.jsp</result>
 		</action>
 
-		<action name="postRepairOrder" class="postRepairOrderAction">
-			<result name="success">/index.jsp</result>
-			<result name="input">/postRepairOrder.jsp</result>
-			<!-- 定义文件上传拦截器 -->
-			<interceptor-ref name="fileUpload">
-				<!-- 设置文件上传大小 -->
-				<param name="maximumSize">4096000</param>
-			</interceptor-ref>
-			<!-- 自定义了拦截器后必手动定义默认的拦截器，否则默认的拦截器不会被执行 -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
 
-		</action>
 
 		<action name="testLookUpStudentRepairOrder" class="testLookUpStudentRepairOrderAction">
 			<result name="success">/detailOfRepairOrder.jsp</result>

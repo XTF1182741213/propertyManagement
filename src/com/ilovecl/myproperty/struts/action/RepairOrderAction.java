@@ -57,6 +57,21 @@ public class RepairOrderAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String getAllToBeCanceled() {
+		return SUCCESS;
+	}
+
+	/**
+	 * 学生获取所有自己的报修单
+	 * 
+	 * @return
+	 */
+	public String getAllS() {
+
+		getdate = lookUpRepairOrderService.getAllRepairOrders();
+		return SUCCESS;
+	}
+
 	// 查看未完成的报修单（管理员）
 	public String getUnFinishM() {
 		getdate = lookUpRepairOrderService.getAllRepairOrders();

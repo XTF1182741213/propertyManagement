@@ -11,6 +11,7 @@ import com.ilovecl.myproperty.DAO.impl.StudentDAO;
 import com.ilovecl.myproperty.DAO.impl.StudentRepairOrderDAO;
 import com.ilovecl.myproperty.model.RepairOrder;
 import com.ilovecl.myproperty.model.Student;
+import com.ilovecl.myproperty.model.StudentRepairOrder;
 import com.ilovecl.myproperty.model.StudentRepairOrderDetail;
 import com.ilovecl.myproperty.model.wrapper.RepairOrderWrapper;
 import com.ilovecl.myproperty.model.wrapper.StudentWrapper;
@@ -71,8 +72,13 @@ public class LookUpRepairOrderService implements ILookUpRepairOrderService {
 
 		for (int i = 0; i < repairOrders.size(); i++) {
 			repairOrder = repairOrders.get(i);
-			student = studentDAO.findById(studentRepairOrderDAO
-					.findByRepairOrderId(repairOrder.getId()).get(0).getId());
+			List<StudentRepairOrder> studentRepairOrders = studentRepairOrderDAO
+					.findByRepairOrderId(repairOrder.getId());
+			if (studentRepairOrders.size() == 0) {
+				continue;
+			}
+
+			student = studentDAO.findById(studentRepairOrders.get(0).getId());
 
 			studentRepairOrderDetails.add(new StudentRepairOrderDetail(
 					repairOrder.getId(), repairOrder.getProblemDescription(),

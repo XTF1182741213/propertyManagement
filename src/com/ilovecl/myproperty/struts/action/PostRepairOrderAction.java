@@ -39,13 +39,12 @@ public class PostRepairOrderAction extends ActionSupport {
 
 	private IPostRepairOrderService postRepairOrderService;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.opensymphony.xwork2.ActionSupport#execute()
-	 */
-	@Override
-	public String execute() throws Exception {
+	public String getForm() {
+		return SUCCESS;
+
+	}
+
+	public String postR() throws Exception {
 		this.message = "";
 
 		if (problemDescription.equals("")) {
