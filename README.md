@@ -1,5 +1,28 @@
 # propertyManagement
-物业保修系统（基于ssh2框架）
+物业保修系统（基于SpringMVC/Spring/Mybatis框架）
+
+## 旧版本（Version 0.1）升级说明------2016-5-28 16:42:49
+
+### 旧版本缺点：
+
+- 基于SSH2框架
+
+- 界面过于老旧，不美观。
+
+- Service层的逻辑较混乱。
+
+- DAO层的设计不完整不规范。
+
+
+### 下一步改进：
+
+- 重构代码
+
+- 使用SpringMVC代替Struts2
+
+- 使用Mybatis代替Hibernate3
+
+- 利用Bootstrap框架和JQuery框架重新设计前端
 
 
 # 开源协议
