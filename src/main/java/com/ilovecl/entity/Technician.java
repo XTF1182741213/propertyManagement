@@ -1,9 +1,7 @@
-package com.ilovecl.dao;
-
-import java.sql.Date;
+package com.ilovecl.entity;
 
 /**
- * 催单
+ * 维修人员
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
  *         copyRight:The MIT License (MIT)
@@ -22,12 +20,17 @@ import java.sql.Date;
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @since 2016-05-29 14:48
  */
-public class UrgentRepair {
-    private int id; // 催单编号
-    private int status; // 催单状态
-    private int repairId; // 催单对应的报修单编号
-    private int studentId; // 提交催单的学生的编号
-    private Date createTime; // 催单创建的时间
+public class Technician {
+    private int id; // 编号
+    private String name; // 姓名
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;
@@ -35,37 +38,5 @@ public class UrgentRepair {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getRepairId() {
-        return repairId;
-    }
-
-    public void setRepairId(int repairId) {
-        this.repairId = repairId;
-    }
-
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 }

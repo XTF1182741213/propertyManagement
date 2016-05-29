@@ -1,4 +1,4 @@
-package com.ilovecl.dao;
+package com.ilovecl.entity;
 
 import java.sql.Date;
 

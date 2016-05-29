@@ -1,7 +1,7 @@
-package com.ilovecl.dao;
+package com.ilovecl.entity;
 
 /**
- * 学生
+ * 管理员
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
  *         copyRight:The MIT License (MIT)
@@ -20,13 +20,10 @@ package com.ilovecl.dao;
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @since 2016-05-29 14:48
  */
-public class Student {
-    private int id; // 学生编号
-    private String name; // 姓名
+public class Admin {
+    private int id; // 编号
+    private String userName; // 用户名
     private String password; // 密码
-    private int sexual; // 性别
-    private String email; // 邮箱
-    private String phone; // 电话
 
     public int getId() {
         return id;
@@ -36,12 +33,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -51,28 +48,5 @@ public class Student {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public int getSexual() {
-        return sexual;
-    }
-
-    public void setSexual(int sexual) {
-        this.sexual = sexual;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }
+

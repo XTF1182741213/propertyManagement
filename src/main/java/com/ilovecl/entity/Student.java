@@ -1,9 +1,7 @@
-package com.ilovecl.dao;
-
-import java.sql.Date;
+package com.ilovecl.entity;
 
 /**
- * 报修单
+ * 学生
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
  *         copyRight:The MIT License (MIT)
@@ -22,14 +20,13 @@ import java.sql.Date;
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @since 2016-05-29 14:48
  */
-public class Repair {
-    private int id; // 报修单编号
-    private int status; // 报修单状态
-    private String detail; // 故障详情
-    private String place; // 故障发生的地点
-    private String picMD5; // 故障现场照片的MD5值
-    private Date submitTime; // 提交报修单的时间
-    private int studentId; // 提交报修单的学生的编号
+public class Student {
+    private int id; // 学生编号
+    private String name; // 姓名
+    private String password; // 密码
+    private int sexual; // 性别
+    private String email; // 邮箱
+    private String phone; // 电话
 
     public int getId() {
         return id;
@@ -39,51 +36,43 @@ public class Repair {
         this.id = id;
     }
 
-    public int getStatus() {
-        return status;
+    public String getName() {
+        return name;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getPlace() {
-        return place;
+    public int getSexual() {
+        return sexual;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setSexual(int sexual) {
+        this.sexual = sexual;
     }
 
-    public String getPicMD5() {
-        return picMD5;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPicMD5(String picMD5) {
-        this.picMD5 = picMD5;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Date getSubmitTime() {
-        return submitTime;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setSubmitTime(Date submitTime) {
-        this.submitTime = submitTime;
-    }
-
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

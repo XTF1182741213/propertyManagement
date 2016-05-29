@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bcb294b5-8a9a-4248-b8e5-0700df6a1e30" name="Default" comment="编写DAO层">
+    <list default="true" id="bcb294b5-8a9a-4248-b8e5-0700df6a1e30" name="Default" comment="补充DAO层的注释">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Admin.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Admin.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Maintenance.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Maintenance.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Repair.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Repair.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Student.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Student.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Technician.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Technician.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/UrgentRepair.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/entity/UrgentRepair.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Admin.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Admin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Maintenance.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Maintenance.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Repair.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Repair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Student.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Student.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Technician.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Technician.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/UrgentRepair.java" afterPath="$PROJECT_DIR$/src/main/java/com/ilovecl/dao/UrgentRepair.java" />
     </list>
     <ignored path="ilovecl.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -418,7 +418,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
+              <option name="myItemId" value="entity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -453,6 +453,11 @@
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/Programs/Git/bin/git.exe" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.ilovecl.entity" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -888,7 +893,7 @@
       <updated>1464421471424</updated>
       <workItem from="1464421472796" duration="3151000" />
       <workItem from="1464495818705" duration="4377000" />
-      <workItem from="1464501346142" duration="3532000" />
+      <workItem from="1464501346142" duration="3702000" />
     </task>
     <task id="LOCAL-00001" summary="编写数据库初始化脚本">
       <created>1464501456742</created>
@@ -904,11 +909,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464503821288</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="补充DAO层的注释">
+      <created>1464504906432</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1464504906432</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11060000" />
+    <option name="totallyTimeSpent" value="11230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -968,7 +980,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="编写数据库初始化脚本" />
     <MESSAGE value="编写DAO层" />
-    <option name="LAST_COMMIT_MESSAGE" value="编写DAO层" />
+    <MESSAGE value="补充DAO层的注释" />
+    <option name="LAST_COMMIT_MESSAGE" value="补充DAO层的注释" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1099,7 +1112,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Student.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Student.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
@@ -1107,28 +1120,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Admin.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Admin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding>
-            <element signature="e#1514#1515#0" expanded="true" />
-            <element signature="e#1539#1540#0" expanded="true" />
-            <element signature="e#1572#1573#0" expanded="true" />
-            <element signature="e#1600#1601#0" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#1666#1667#0" expanded="true" />
-            <element signature="e#1714#1715#0" expanded="true" />
-            <element signature="e#1754#1755#0" expanded="true" />
-            <element signature="e#1789#1790#0" expanded="true" />
-            <element signature="e#1820#1821#0" expanded="true" />
-            <element signature="e#1868#1869#0" expanded="true" />
-            <element signature="e#1908#1909#0" expanded="true" />
+            <element signature="e#1517#1518#0" expanded="true" />
+            <element signature="e#1542#1543#0" expanded="true" />
+            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#1603#1604#0" expanded="true" />
+            <element signature="e#1638#1639#0" expanded="true" />
+            <element signature="e#1669#1670#0" expanded="true" />
+            <element signature="e#1717#1718#0" expanded="true" />
+            <element signature="e#1757#1758#0" expanded="true" />
+            <element signature="e#1792#1793#0" expanded="true" />
+            <element signature="e#1823#1824#0" expanded="true" />
+            <element signature="e#1871#1872#0" expanded="true" />
+            <element signature="e#1911#1912#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Repair.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Repair.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
           <caret line="31" column="41" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
@@ -1136,7 +1149,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/dao/UrgentRepair.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/entity/UrgentRepair.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
           <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
@@ -1144,7 +1157,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Technician.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Technician.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
@@ -1152,7 +1165,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/dao/Maintenance.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ilovecl/entity/Maintenance.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
           <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
