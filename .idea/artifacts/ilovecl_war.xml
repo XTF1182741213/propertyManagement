@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ilovecl:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="ilovecl.war">
+      <element id="artifact" artifact-name="ilovecl:war exploded" />
+    </root>
+  </artifact>
+</component>
