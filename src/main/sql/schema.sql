@@ -68,7 +68,7 @@ CREATE TABLE repair (
   `studentId`  INT                NOT NULL
   COMMENT '提交该报修单的学生的编号',
   PRIMARY KEY (id),
-  KEY (studentId)
+  KEY idx_studentId(studentId)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
@@ -76,16 +76,18 @@ CREATE TABLE repair (
 
 -- 创建催单表
 CREATE TABLE urgentRepair (
-  `id`        INT AUTO_INCREMENT NOT NULL
+  `id`         INT AUTO_INCREMENT NOT NULL
   COMMENT '编号ID',
-  `status`    INT                NOT NULL DEFAULT 0
+  `status`     INT                NOT NULL DEFAULT 0
   COMMENT '状态：0为待查看，1为已查看，2为被学生取消，默认为待查看',
-  `repairId`  INT                NOT NULL
+  `repairId`   INT                NOT NULL
   COMMENT '该催单对应的报修单编号',
-  `studentId` INT                NOT NULL
+  `studentId`  INT                NOT NULL
   COMMENT '发起该催单的学生的编号',
+  `createTime` DATETIME           NOT NULL
+  COMMENT '催单的创建时间',
   PRIMARY KEY (id),
-  KEY (studentId)
+  KEY idx_studentId(studentId)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
@@ -93,14 +95,14 @@ CREATE TABLE urgentRepair (
 
 -- 创建维修记录表
 CREATE TABLE maintenance (
-  `id` INT NOT NULL AUTO_INCREMENT
+  `id`        INT      NOT NULL AUTO_INCREMENT
   COMMENT '编号ID',
-  `repairId` int NOT NULL
+  `repairId`  INT      NOT NULL
   COMMENT '该维修记录对应的报修单编号',
   `startTime` DATETIME NOT NULL
   COMMENT '维修开始的时间',
   PRIMARY KEY (id),
-  KEY (repairId)
+  KEY idx_repairId(repairId)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
