@@ -24,7 +24,7 @@
         <property name="minPoolSize" value="10"/>
         <property name="autoCommitOnClose" value="false"/>
         <!--获取连接超时时间-->
-        <property name="checkoutTimeout" value="1024"/>
+        <!--<property name="checkoutTimeout" value="1024"/>-->
         <!--获取失败的重试次数-->
         <property name="acquireRetryAttempts" value="2"/>
     </bean>
