@@ -1,13 +1,10 @@
 package com.ilovecl.dao;
 
 /**
+ * 管理员
  * @author qiuyongchen
- *         email qiuych3@mail2.sysu.edu.cn
- *         date 2016-05-29
- *         time 14:33
- *         <p>
- *         The MIT License (MIT)
- *         <p>
+ *         email:qiuych3@mail2.sysu.edu.cn
+ *         copyRight:The MIT License (MIT)
  *         Copyright (c) 2016 邱永臣
  *         Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *         documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -21,11 +18,12 @@ package com.ilovecl.dao;
  *         WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
  *         OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * @since 2016-05-29 14:48
  */
 public class Admin {
-    private int id;
-    private String userName;
-    private String password;
+    private int id; // 编号
+    private String userName; // 用户名
+    private String password; // 密码
 
     public int getId() {
         return id;
@@ -51,3 +49,4 @@ public class Admin {
         this.password = password;
     }
 }
+

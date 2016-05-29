@@ -3,13 +3,10 @@ package com.ilovecl.dao;
 import java.sql.Date;
 
 /**
+ * 催单
  * @author qiuyongchen
- *         email qiuych3@mail2.sysu.edu.cn
- *         date 2016-05-29
- *         time 14:33
- *         <p>
- *         The MIT License (MIT)
- *         <p>
+ *         email:qiuych3@mail2.sysu.edu.cn
+ *         copyRight:The MIT License (MIT)
  *         Copyright (c) 2016 邱永臣
  *         Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *         documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -23,13 +20,14 @@ import java.sql.Date;
  *         WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
  *         OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * @since 2016-05-29 14:48
  */
 public class UrgentRepair {
-    private int id;
-    private int status;
-    private int repairId;
-    private int studentId;
-    private Date createTime;
+    private int id; // 催单编号
+    private int status; // 催单状态
+    private int repairId; // 催单对应的报修单编号
+    private int studentId; // 提交催单的学生的编号
+    private Date createTime; // 催单创建的时间
 
     public int getId() {
         return id;

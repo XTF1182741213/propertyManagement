@@ -3,13 +3,10 @@ package com.ilovecl.dao;
 import java.sql.Date;
 
 /**
+ * 维修记录
  * @author qiuyongchen
- *         email qiuych3@mail2.sysu.edu.cn
- *         date 2016-05-29
- *         time 14:33
- *         <p>
- *         The MIT License (MIT)
- *         <p>
+ *         email:qiuych3@mail2.sysu.edu.cn
+ *         copyRight:The MIT License (MIT)
  *         Copyright (c) 2016 邱永臣
  *         Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *         documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -23,11 +20,12 @@ import java.sql.Date;
  *         WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
  *         OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * @since 2016-05-29 14:48
  */
 public class Maintenance {
-    private int id;
-    private int repairId;
-    private Date startTime;
+    private int id; // 维修记录编号
+    private int repairId; // 维修记录对应的报修单的编号
+    private Date startTime; // 维修记录发起的时间
 
     public int getId() {
         return id;
