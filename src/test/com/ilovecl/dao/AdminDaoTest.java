@@ -7,8 +7,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
-import static org.junit.Assert.*;
-
 /**
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
@@ -30,4 +28,8 @@ public class AdminDaoTest {
         System.out.println(adminDao.queryById(2).getPassword());
     }
 
+    @Test
+    public void queryAll() throws Exception {
+        System.out.println(adminDao.queryAll());
+    }
 }

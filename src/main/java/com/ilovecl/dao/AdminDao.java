@@ -2,6 +2,8 @@ package com.ilovecl.dao;
 
 import com.ilovecl.entity.Admin;
 
+import java.util.List;
+
 /**
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
@@ -9,4 +11,6 @@ import com.ilovecl.entity.Admin;
  */
 public interface AdminDao {
     Admin queryById(int id);
+
+    List<Admin> queryAll();
 }
