@@ -98,7 +98,7 @@ CREATE TABLE maintenance (
   `repairId` int NOT NULL
   COMMENT '该维修记录对应的报修单编号',
   `startTime` DATETIME NOT NULL
-  COMMENT '维修开始时间',
+  COMMENT '维修开始的时间',
   PRIMARY KEY (id),
   KEY (repairId)
 )
