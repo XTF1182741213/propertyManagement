@@ -107,3 +107,9 @@ CREATE TABLE maintenance (
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
   COMMENT = '维修记录表';
+
+SHOW DATABASES ;
+SHOW TABLES;
+DESCRIBE admin;
+INSERT INTO  `admin` VALUES (2, 'admin', 'hello people');
+SELECT * FROM admin;
