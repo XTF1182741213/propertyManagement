@@ -1,6 +1,6 @@
 package com.ilovecl.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 维修记录
@@ -25,7 +25,18 @@ import java.sql.Date;
 public class Maintenance {
     private int id; // 维修记录编号
     private int repairId; // 维修记录对应的报修单的编号
-    private Date startTime; // 维修记录发起的时间
+    private Timestamp startTime; // 维修记录发起的时间
+
+    public Maintenance(Integer id, Integer repairId, Timestamp startTime) {
+        this.id = id;
+        this.repairId = repairId;
+        this.startTime = startTime;
+    }
+
+    public Maintenance(Integer repairId, Timestamp startTime) {
+        this.repairId = repairId;
+        this.startTime = startTime;
+    }
 
     public int getId() {
         return id;
@@ -43,11 +54,11 @@ public class Maintenance {
         this.repairId = repairId;
     }
 
-    public Date getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 }

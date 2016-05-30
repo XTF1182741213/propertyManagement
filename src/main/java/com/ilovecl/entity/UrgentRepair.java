@@ -1,6 +1,6 @@
 package com.ilovecl.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 催单
@@ -27,7 +27,22 @@ public class UrgentRepair {
     private int status; // 催单状态
     private int repairId; // 催单对应的报修单编号
     private int studentId; // 提交催单的学生的编号
-    private Date createTime; // 催单创建的时间
+    private Timestamp createTime; // 催单创建的时间
+
+    public UrgentRepair(Integer id, Integer status, Integer repairId, Integer studentId, Timestamp createTime) {
+        this.id = id;
+        this.status = status;
+        this.repairId = repairId;
+        this.studentId = studentId;
+        this.createTime = createTime;
+    }
+
+    public UrgentRepair(Integer status, Integer repairId, Integer studentId, Timestamp createTime) {
+        this.status = status;
+        this.repairId = repairId;
+        this.studentId = studentId;
+        this.createTime = createTime;
+    }
 
     public int getId() {
         return id;
@@ -61,11 +76,11 @@ public class UrgentRepair {
         this.studentId = studentId;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 }

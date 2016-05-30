@@ -1,6 +1,6 @@
 package com.ilovecl.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 报修单
@@ -28,8 +28,27 @@ public class Repair {
     private String detail; // 故障详情
     private String place; // 故障发生的地点
     private String picMD5; // 故障现场照片的MD5值
-    private Date submitTime; // 提交报修单的时间
+    private Timestamp submitTime; // 提交报修单的时间
     private int studentId; // 提交报修单的学生的编号
+
+    public Repair(Integer id, Integer status, String detail, String place, String picMD5, Timestamp submitTime, Integer studentId) {
+        this.id = id;
+        this.status = status;
+        this.detail = detail;
+        this.place = place;
+        this.picMD5 = picMD5;
+        this.submitTime = submitTime;
+        this.studentId = studentId;
+    }
+
+    public Repair(Integer status, String detail, String place, String picMD5, Timestamp submitTime, Integer studentId) {
+        this.status = status;
+        this.detail = detail;
+        this.place = place;
+        this.picMD5 = picMD5;
+        this.submitTime = submitTime;
+        this.studentId = studentId;
+    }
 
     public int getId() {
         return id;
@@ -71,11 +90,11 @@ public class Repair {
         this.picMD5 = picMD5;
     }
 
-    public Date getSubmitTime() {
+    public Timestamp getSubmitTime() {
         return submitTime;
     }
 
-    public void setSubmitTime(Date submitTime) {
+    public void setSubmitTime(Timestamp submitTime) {
         this.submitTime = submitTime;
     }
 
