@@ -32,7 +32,7 @@ public interface StudentService {
      * @param phone
      * @return
      */
-    boolean changeOtherInfo(int sexual, String email, String phone);
+    boolean changeOtherInfo(int studentId, int sexual, String email, String phone);
 
     /********************************管理员端的接口*************************************************************/
 

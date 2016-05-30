@@ -18,6 +18,8 @@ public interface UrgentRepairDao {
     //    根据报修单ID查询催单记录
     UrgentRepair queryByRepairId(int repairId);
 
+    List<UrgentRepair> queryByStudentId(int studentId);
+
     //    查询所有催单
     List<UrgentRepair> queryAll();
 

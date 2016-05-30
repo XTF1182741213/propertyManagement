@@ -11,6 +11,10 @@
         SELECT * FROM urgentRepair WHERE repairId = #{repairId}
     </select>
 
+    <select id="queryByStudentId" resultSets="List" resultType="UrgentRepair">
+        SELECT * FROM urgentRepair WHERE studentId = #{studentId}
+    </select>
+
     <select id="queryAll" resultSets="List" resultType="UrgentRepair">
         SELECT * FROM urgentRepair
     </select>

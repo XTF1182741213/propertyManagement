@@ -25,5 +25,7 @@ public interface MaintenanceDao {
     //    增加一条维修记录
     int add(Maintenance maintenance);
 
+    int delete(Maintenance maintenance);
+
 }
 

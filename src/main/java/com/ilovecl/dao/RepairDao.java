@@ -15,6 +15,8 @@ public interface RepairDao {
     //    根据ID查询
     Repair queryById(int id);
 
+    List<Repair> queryByStudentId(int studentId);
+
     //    查询所有报修单
     List<Repair> queryAll();
 

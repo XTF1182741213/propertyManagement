@@ -29,6 +29,10 @@ public class UrgentRepair {
     private int studentId; // 提交催单的学生的编号
     private Timestamp createTime; // 催单创建的时间
 
+    public UrgentRepair(int repairId) {
+        this.repairId = repairId;
+    }
+
     public UrgentRepair(Integer id, Integer status, Integer repairId, Integer studentId, Timestamp createTime) {
         this.id = id;
         this.status = status;

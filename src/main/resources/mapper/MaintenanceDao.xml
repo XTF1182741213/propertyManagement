@@ -15,11 +15,13 @@
         SELECT * FROM maintenance
     </select>
 
-    <insert id="add" parameterType="maintenance" useGeneratedKeys="true"
+    <insert id="add" parameterType="Maintenance" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO maintenance (repairId, startTime)
         VALUE (#{repairId}, #{startTime})
     </insert>
 
-
+    <delete id="delete" parameterType="Maintenance">
+        DELETE FROM maintenance WHERE id=#{id}
+    </delete>
 </mapper>

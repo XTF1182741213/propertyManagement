@@ -2,6 +2,8 @@ package com.ilovecl.dao;
 
 import com.ilovecl.entity.Technician;
 
+import java.util.List;
+
 /**
  * 维修人员DAO层
  *
@@ -12,4 +14,12 @@ import com.ilovecl.entity.Technician;
 public interface TechnicianDao {
     //    根据ID查询
     Technician queryById(int id);
+
+    List<Technician> queryAll();
+
+    boolean addTechnician(String name);
+
+    boolean delete(int id);
+
+    boolean update(int id, String name);
 }

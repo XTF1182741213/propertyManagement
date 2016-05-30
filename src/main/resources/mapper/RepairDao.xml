@@ -7,6 +7,10 @@
         SELECT * FROM repair WHERE id = #{id}
     </select>
 
+    <select id="queryByStudentId" resultSets="List" resultType="Repair">
+        SELECT * FROM repair WHERE studentId = #{studentId}
+    </select>
+
     <select id="queryAll" resultSets="List" resultType="Repair">
         SELECT * FROM repair
     </select>

@@ -97,11 +97,13 @@ CREATE TABLE urgentRepair (
 
 -- 创建维修记录表
 CREATE TABLE maintenance (
-  `id`        INT      NOT NULL AUTO_INCREMENT
+  `id`           INT      NOT NULL AUTO_INCREMENT
   COMMENT '编号ID',
-  `repairId`  INT      NOT NULL
+  `repairId`     INT      NOT NULL
   COMMENT '该维修记录对应的报修单编号',
-  `startTime` DATETIME NOT NULL
+  `technicianId` INT      NOT NULL
+  COMMENT '维修人员的编号',
+  `startTime`    DATETIME NOT NULL
   COMMENT '维修开始的时间',
   PRIMARY KEY (id),
   KEY idx_repairId(repairId)

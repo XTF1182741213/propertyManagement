@@ -25,17 +25,32 @@ import java.sql.Timestamp;
 public class Maintenance {
     private int id; // 维修记录编号
     private int repairId; // 维修记录对应的报修单的编号
+    private int technicianId; // 维修人员的编号
     private Timestamp startTime; // 维修记录发起的时间
 
-    public Maintenance(Integer id, Integer repairId, Timestamp startTime) {
+    public Maintenance(int id) {
+        this.id = id;
+    }
+
+    public Maintenance(int id, int repairId, int technicianId, Timestamp startTime) {
         this.id = id;
         this.repairId = repairId;
+        this.technicianId = technicianId;
         this.startTime = startTime;
     }
 
-    public Maintenance(Integer repairId, Timestamp startTime) {
+    public Maintenance(int repairId, int technicianId, Timestamp startTime) {
         this.repairId = repairId;
+        this.technicianId = technicianId;
         this.startTime = startTime;
+    }
+
+    public int getTechnicianId() {
+        return technicianId;
+    }
+
+    public void setTechnicianId(int technicianId) {
+        this.technicianId = technicianId;
     }
 
     public int getId() {
