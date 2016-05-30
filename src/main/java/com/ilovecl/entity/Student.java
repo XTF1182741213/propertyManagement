@@ -28,6 +28,11 @@ public class Student {
     private String email; // 邮箱
     private String phone; // 电话
 
+    public Student(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
     public Student(Integer id, String name, String password, Integer sexual, String email, String phone) {
         this.id = id;
         this.name = name;
