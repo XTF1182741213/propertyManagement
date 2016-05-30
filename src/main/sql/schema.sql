@@ -18,7 +18,8 @@ CREATE TABLE student (
   COMMENT '性别：0为男1为女，默认为男',
   `email`    VARCHAR(50) COMMENT '邮箱',
   `phone`    VARCHAR(50) COMMENT '电话',
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  KEY (name)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
@@ -32,7 +33,8 @@ CREATE TABLE admin (
   COMMENT '用户名',
   `password` VARCHAR(50) NOT NULL
   COMMENT '密码',
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  KEY (userName)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
@@ -108,8 +110,9 @@ CREATE TABLE maintenance (
   DEFAULT CHARSET = UTF8
   COMMENT = '维修记录表';
 
-SHOW DATABASES ;
+SHOW DATABASES;
 SHOW TABLES;
 DESCRIBE admin;
-INSERT INTO  `admin` VALUES (2, 'admin', 'hello people');
-SELECT * FROM admin;
+INSERT INTO `admin` VALUES (2, 'admin', 'hello people');
+SELECT *
+FROM admin;
