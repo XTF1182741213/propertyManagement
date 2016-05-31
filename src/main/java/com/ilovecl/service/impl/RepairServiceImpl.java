@@ -44,6 +44,10 @@ public class RepairServiceImpl implements RepairService {
     @Autowired
     private MaintenanceDao maintenanceDao;
 
+    public Repair getRepairById(int repairId) {
+        return repairDao.queryById(repairId);
+    }
+
     /**
      * 提交报修单的接口
      *
@@ -237,7 +241,7 @@ public class RepairServiceImpl implements RepairService {
      * @param technicianId 维修人员的编号ID
      */
     public void arrangeRepair(int repairId, int technicianId) {
-        Repair repair = repairDao.queryById(repairId)
+        Repair repair = repairDao.queryById(repairId);
 
         repair.setStatus(RepairEnum.REPAIR_ARRANGED.getState());
 

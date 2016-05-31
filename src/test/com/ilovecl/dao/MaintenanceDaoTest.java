@@ -40,7 +40,7 @@ public class MaintenanceDaoTest {
 
     @Test
     public void add() throws Exception {
-        maintenanceDao.add(new Maintenance(121, new Timestamp(2342L)));
+        maintenanceDao.add(new Maintenance(121, 123, new Timestamp(2342L)));
     }
 
 }

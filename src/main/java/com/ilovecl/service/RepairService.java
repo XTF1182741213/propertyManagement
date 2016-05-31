@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface RepairService {
 
+    Repair getRepairById(int repairId);
+
     /*****************************学生端的接口*****************************************/
 
     /**
