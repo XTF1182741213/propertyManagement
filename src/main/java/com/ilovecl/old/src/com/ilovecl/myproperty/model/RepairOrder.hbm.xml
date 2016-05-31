@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ilovecl.myproperty.model.RepairOrder" table="RepairOrder">
+
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="increment"/>
+        </id>
+        <property name="problemDescription" type="java.lang.String">
+            <column name="problemDescription" length="2048"/>
+        </property>
+        <property name="place" type="java.lang.String">
+            <column name="place" length="200"/>
+        </property>
+        <property name="problemImage" type="java.lang.String">
+            <column name="problemImage" length="200"/>
+        </property>
+        <property name="launchDate" type="date">
+            <column name="launchDate"/>
+        </property>
+        <property name="order_status" type="java.lang.Integer">
+            <column name="order_status"/>
+        </property>
+    </class>
+</hibernate-mapping>
