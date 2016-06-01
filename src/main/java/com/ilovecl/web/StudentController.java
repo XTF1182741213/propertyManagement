@@ -1,5 +1,6 @@
 package com.ilovecl.web;
 
+import com.ilovecl.dto.LoginResult;
 import com.ilovecl.entity.Repair;
 import com.ilovecl.service.RepairService;
 import com.ilovecl.service.StudentService;
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -60,6 +64,24 @@ public class StudentController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         return "/student/login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    LoginResult login(String email, String password, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+
+
+        logger.info("***************************************************************************");
+        logger.info("email : " + email + " password : " + password);
+        logger.info("***************************************************************************");
+
+        return new LoginResult(true);
+    }
+
+    @RequestMapping(value = "/loin", method = RequestMethod.GET)
+    public String login() {
+        return "student/test";
     }
 
     @RequestMapping(value = "/commit", method = RequestMethod.GET)

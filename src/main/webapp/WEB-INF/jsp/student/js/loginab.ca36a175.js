@@ -572,59 +572,34 @@ wd.login.init = function () {
         autologin: c
     };
     $.ajax({
-        url: "https://www.wilddog.com/account/login",
+        url: "/student/login",
         type: "POST",
-        data: m,
+        data: {
+            email: a,
+            password: b
+        },
         cache: !1,
         timeout: 3e4,
         dataType: "json",
-        success: function (b, c, e) {
-            var f = b.code;
-            0 == f ? ("undefined" != typeof mixpanel && (mixpanel.identify(a), mixpanel.people.set({$email: a})), setTimeout(function () {
-                window.location.href = d
-            }, 500)) : 1 == f && ($("#login-btn").removeAttr("disabled"), warnings.eq(1).text("Email或密码错误").addClass("warning-password-show"))
+        success: function (data) {
+            if (data.password == "invalid user") {
+                $("#login-btn").removeAttr("disabled"), warnings.eq(0).text("该用户不存在").addClass("warning-password-show")
+            }
+            else if (data.resultInfo == "invalid password") {
+                $("#login-btn").removeAttr("disabled"), warnings.eq(1).text("密码错误").addClass("warning-password-show")
+            } else {
+
+                alert("登录成功: " + data.name + "\n");
+
+                var f = b.code;
+                0 == f ? ("undefined" != typeof mixpanel && (mixpanel.identify(a), mixpanel.people.set({$email: a})), setTimeout(function () {
+                    window.location.href = d
+                }, 500)) : 1 == f && ($("#login-btn").removeAttr("disabled"), warnings.eq(1).text("Email或密码错误").addClass("warning-password-show"))
+            }
         },
         error: function () {
+            alert("fail\n");
             $("#login-btn").removeAttr("disabled"), warnings.eq(1).text("Email或密码错误").addClass("warning-password-show")
-        }
-    })
-}, wd.login.doGithub = function () {
-    $("#login-btn").attr("disabled", "true"), "undefined" != typeof mixpanel && mixpanel.track("login with github"), $.ajax({
-        url: "/account/github/url",
-        type: "GET",
-        dataType: "json",
-        success: function (a, b, c) {
-            var d = a.url;
-            setTimeout(window.location = d, 200)
-        },
-        error: function () {
-            $("#login-btn").removeAttr("disabled")
-        }
-    })
-}, wd.login.doCoding = function () {
-    $("#login-btn").attr("disabled", "true"), "undefined" != typeof mixpanel && mixpanel.track("login with coding"), $.ajax({
-        url: "/account/coding/url",
-        type: "GET",
-        dataType: "json",
-        success: function (a, b, c) {
-            var d = a.url;
-            setTimeout(window.location = d, 200)
-        },
-        error: function () {
-            $("#login-btn").removeAttr("disabled")
-        }
-    })
-}, wd.login.doWeibo = function () {
-    $("#login-btn").attr("disabled", "true"), "undefined" != typeof mixpanel && mixpanel.track("login with weibo"), $.ajax({
-        url: "/account/weibo/url",
-        type: "GET",
-        dataType: "json",
-        success: function (a, b, c) {
-            var d = a.url;
-            setTimeout(window.location = d, 200)
-        },
-        error: function () {
-            $("#login-btn").removeAttr("disabled")
         }
     })
 }, wd.util = wd.util || {}, wd.util.validateEmail = function (a) {

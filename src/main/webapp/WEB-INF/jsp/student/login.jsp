@@ -121,7 +121,8 @@
                 <div class="login-input-group">
                     <p class="input-title">邮箱：<span class="signup">没有账号？ 去<a href="/student/register">注册</a></span></p>
                     <div class="input-fill">
-                        <input type="text" name="email" class="email-signup email-input" autofocus="true">
+                        <input type="text" name="email" id="inputEmail" class="email-signup email-input"
+                               autofocus="true">
                     </div>
                     <span class="warning text-center"></span>
                 </div>
@@ -130,10 +131,11 @@
                             class="question"></span></span>
                     </p>
                     <div class="input-fill">
-                        <input type="password" name="password" class="email-signup password">
+                        <input type="password" name="password" id="inputPassword" class="email-signup password">
                     </div>
                     <span class="warning warning-password text-center"></span>
                 </div>
+
             </form>
             <div class="login-sub text-center">
                 <button class="btn btn-org-empty" id="login-btn">登&nbsp;&nbsp;录</button>
@@ -162,7 +164,7 @@
     </div>
 </div>
 <script src="https://img.wdstatic.cn/www-nd/scripts/jq.670de40a.js"></script>
-<script src="js/loginab.ca36a175.js"></script>
+<script src="./js/loginab.ca36a175.js"></script>
 <script type="text/javascript">
     wd.login.init();
 </script>
@@ -186,6 +188,21 @@
 <!-- End Google Tag Manager -->
 <script>
     var baseExp = 'channel4'
+</script>
+
+<script>
+    function myLogin() {
+        $.post("/student/login",
+                {
+                    email: "qiuych3@mail2.sysu.edu.cn",
+                    password: "qiuyongchen"
+                },
+                function (data) {
+                    alert("Data: " + data.name + "\n");
+                });
+    }
+    ;
+
 </script>
 </body>
 

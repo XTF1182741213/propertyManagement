@@ -32,6 +32,7 @@ public class Student {
         this.id = id;
     }
 
+
     public Student(String name, String password) {
         this.name = name;
         this.password = password;
