@@ -15,7 +15,7 @@
 
     <mvc:resources mapping="/student/js/**" location="WEB-INF/jsp/student/js/"/>
     <mvc:resources mapping="/student/css/**" location="WEB-INF/jsp/student/css/"/>
-    <mvc:resources mapping="/student/fonts/**" location="WEB-INF/jsp/student/fonts/"/>
+    <mvc:resources mapping="/student/icon/**" location="WEB-INF/jsp/student/icon/"/>
 
     <!--配置JSP-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

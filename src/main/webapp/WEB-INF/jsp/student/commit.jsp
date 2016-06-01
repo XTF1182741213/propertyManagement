@@ -16,7 +16,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>红叶物业报修系统</title>
+    <title>提交报修单_红叶物业报修系统</title>
     <meta name="keywords"
           content="wilddog, WildDog, realtime, PaaS, BaaS, HTMl5, CoAP, Thread, REST, Javascript, DTLS, websockets, realtime sync, UDP, JSON, developer, B2B, SDK, iOS, Android, Mac OS, Windows, 野狗, 野狗实时, 野狗云, 实时应用, 实时同步, 实时数据库, 跨平台, 物联网, 构建实时应用, 受限网络, 传感网, 解决方案, 云平台, 云计算, 云服务, 公有云, 私有云, 开发者">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="https://z.wilddog.com/css/header_public.css">
     <link rel="stylesheet" href="https://z.wilddog.com/css/footer.css">
     <link rel="stylesheet" href="https://z.wilddog.com/css/doc.css">
+
 </head>
 
 <body>
@@ -47,9 +48,9 @@
             <li class="category  active">
                 <div class="category-title"><a href="<c:url value="/student/dashboard"/>">报修单</a></div>
                 <ul class="pages">
-                    <li class="page  active"><a href="<c:url value="/student/dashboard"/>" class="unvisited">查看</a>
+                    <li class="page "><a href="<c:url value="/student/dashboard"/>" class="unvisited">查看</a>
                     </li>
-                    <li class="page "><a href="<c:url value="/student/commit"/>" class="unvisited">提交</a>
+                    <li class="page active "><a href="<c:url value="/student/commit"/>" class="unvisited">提交</a>
                     </li>
                 </ul>
             </li>
@@ -72,71 +73,56 @@
         </div>
 
         <div class="col-md-9 col-md-offset-1 layout-page">
-            <%--<div class="page-right">--%>
-            <%--<div class="page-right-fixed">--%>
-            <%--<div class="document-menu">--%>
-            <%--<div class="menu-title">内容大纲</div>--%>
-            <%--<ul>--%>
-            <%--<li><a href="#ye-gou-shi-shi-mo0">野狗是什么</a></li>--%>
-            <%--<li><a href="#shu-ju-cun-chu0">数据存储</a></li>--%>
-            <%--<li><a href="#shi-shi-tong-xin0">实时通信</a></li>--%>
-            <%--</ul>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-            <section class="content">
-                <h1> 所有报修单 </h1>
-                <div class="func pull-right">
 
-                    <%--<div>asd</div>--%>
-                    <%--<div class="func-section" id="func-section-video"><img src="/images/func-video.svg"--%>
-                    <%--class="func-img">视频--%>
-                    <%--</div>--%>
-                    <%--<div class="func-section" id="func-section-print"><img src="/images/func-print.svg"--%>
-                    <%--class="func-img">打印--%>
-                    <%--</div>--%>
+            <section class="content">
+                <h1> 提交报修单 </h1>
+                <div class="func pull-right">
 
                 </div>
 
                 <div class="content-text">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>状态</th>
-                            <th>详情</th>
-                            <th>地点</th>
-                            <th>提交时间</th>
-                            <th>删除</th>
-                            <th>修改</th>
-                            <th>验收</th>
-                            <th>详情</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="r" items="${list}">
-                            <tr>
-                                <td>${r.status}</td>
-                                <td>${r.detail}</td>
-                                <td>${r.place}</td>
-                                <td>
-                                    <fmt:formatDate value="${r.submitTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                                </td>
-                                <td>
-                                    <a class="btn btn-danger" href="/repair/${r.id}/detail">删除</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-warning" href="/repair/${r.id}/detail">修改</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-primary" href="/repair/${r.id}/detail">验收</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-link" href="/repair/${r.id}/detail">详情</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div id="legend" class="">
+                                <legend class="">表单名</legend>
+                            </div>
+
+
+                            <div class="control-group">
+
+                                <!-- Textarea -->
+                                <label class="control-label">故障详情</label>
+                                <div class="controls">
+                                    <div class="textarea">
+                                        <textarea type="" class=""> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+
+                                <!-- Text input-->
+                                <label class="control-label" for="input01">故障地点</label>
+                                <div class="controls">
+                                    <input type="text" placeholder="尽可能详细地描述发生故障物业的地点" class="input-xlarge">
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label class="control-label">现场图片</label>
+
+                                <!-- File Upload -->
+                                <div class="controls">
+                                    <input class="input-file" id="fileInput" type="file">
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+
                 </div>
             </section>
         </div>
@@ -149,6 +135,7 @@
 
 <%--引入页面底部--%>
 <%@include file="footer.jsp" %>
+
 
 <script src="https://z.wilddog.com/bower_components/jquery/dist/jquery.min.js"></script>
 <!--

@@ -1,58 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: 邱永臣
-  Date: 2016-05-31
-  Time: 19:17
+  Date: 2016-06-01
+  Time: 14:01
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%--bootsrtap示例版--%>
-<%--<html>
-<head>
-
-    <%@include file="common/bootstrap-header.jsp" %>
-
-    <!-- Custom styles for this template -->
-    <link href="css/my/signin.css" rel="stylesheet">
-    <title>登录(学生)</title>
-
-    <script>
-        function login() {
-            alert("你是帅哥");
-        }
-    </script>
-</head>
-
-<body>
-
-
-<div class="container">
-
-    <form class="form-signin">
-        <h2 class="form-signin-heading">登录系统</h2>
-
-        <label for="inputUserName" class="sr-only">userName</label>
-        <input type="text" id="inputUserName" class="form-control" placeholder="输入昵称" aria-describedby="basic-addon1"
-               required>
-        <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="输入密码" required>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> 记住我
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">登录</button>
-    </form>
-
-</div> <!-- /container -->
-
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="js/ie10-viewport-bug-workaround.js"></script>
-</body>
-</html>--%>
-
 
 <!DOCTYPE html>
 <html lang="zh">
@@ -61,7 +14,7 @@
     <!-- End of Google Analytics Content Experiment code -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>红叶物业报修系统 - 登录</title>
+    <title>红叶物业报修系统 - 注册</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="format-detection" content="email=no"/>
     <meta name="format-detection" content="address=no"/>
@@ -76,7 +29,7 @@
     <link rel="stylesheet" href="https://css.wdstatic.cn/www-nd/styles/wilddog-ui.b4f94a7c.css">
     <link rel="stylesheet" href="https://img.wdstatic.cn/www-nd/styles/webfonts.ea19afc4.css">
     <link rel="stylesheet" href="https://css.wdstatic.cn/www-nd/styles/fonts.1e1a628e.css">
-    <link rel="stylesheet" href="./css/login-varab.30c2bb34.css">
+    <link rel="stylesheet" href="./css/signup-varab.0c7cffb4.css">
     <link rel="dns-prefetch" href="https://z.wilddog.com">
     <link rel="dns-prefetch" href="https://talks.z.wilddog.com">
     <link rel="dns-prefetch" href="https://github.com">
@@ -111,60 +64,63 @@
 <div style='display:none;'><img src='https://css.wdstatic.cn/www-nd/images/weixin-share-icon.c28bd20b.jpg' alt="微信分享"/>
 </div>
 <div class="container content content3">
-    <div class="login-content clearfix">
-        <div class="login-main">
-            <h2 class="fzlt login-title">登录红叶账号</h2>
+    <div class="register-content clearfix">
+        <div class="register-main">
+            <h2 class="fzlt register-title">注册红叶账号</h2>
+            <p class="register-adv">立刻参与先进的在线报修行动</p>
             <form accept-charset="utf-8" class="submit-form">
-                <input type="hidden" id="next" name="next" value="">
-                <input type="hidden" id="ck" name="ck" value="nSV4F3McXx8gCMiuIRtF3rQVxmxHO76T">
-                <input type="hidden" id="sk" name="sk" value="NR5NEjVaJvwaU59x">
-                <div class="login-input-group">
-                    <p class="input-title">邮箱：<span class="signup">没有账号？ 去<a href="/student/register">注册</a></span></p>
+                <div class="register-input-group">
+                    <p class="input-title">邮箱：<span class="login">已有账号？ 去<a href="/student/login">登录</a></span></p>
                     <div class="input-fill">
-                        <input type="text" name="email" class="email-signup email-input" autofocus="true">
+                        <input type="text" class="email-signup input-focus email-input" autofocus="true">
                     </div>
                     <span class="warning text-center"></span>
                 </div>
-                <div class="login-input-group">
-                    <p class="input-title">密码： <span class="forget-password"><a href="/student/forgot">忘记密码</a><span
-                            class="question"></span></span>
-                    </p>
+                <div class="register-input-group">
+                    <p class="input-title">名字： </p>
                     <div class="input-fill">
-                        <input type="password" name="password" class="email-signup password">
+                        <input type="text" class="email-signup " required="required">
                     </div>
-                    <span class="warning warning-password text-center"></span>
+                    <span class="warning text-center"></span>
                 </div>
+                <div class="register-input-group">
+                    <p class="input-title">密码： </p>
+                    <div class="input-fill">
+                        <input type="password" class="email-signup password">
+                    </div>
+                    <span class="warning text-center"></span>
+                </div>
+
             </form>
-            <div class="login-sub text-center">
-                <button class="btn btn-org-empty" id="login-btn">登&nbsp;&nbsp;录</button>
+
+            <div class="register-sub text-center">
+                <button class="btn btn-org-empty" id="register-btn">注&nbsp;&nbsp;册</button>
             </div>
             <div class="pro">
                 <div class="agree text-center">
-                    <div class="direct">
-                        <input type="checkbox" value="auto" id="auto-login">记住我
-                    </div>
+                    注册账号，代表您同意 《<a href="/terms/sa" target="_blank" class="agreement">红叶物业报修系统服务协议</a>》
                     <div class="secrecy">您的信息将通过加密渠道传输</div>
                 </div>
             </div>
-            <div class="others-login text-center">
+            <div class="text-center three">
                 <div class="text-center three-title">
                     <span class="line line-left"></span>
                     <span class="or">or</span>
                     <span class="line line-right"></span>
                 </div>
                 <div class="party-link">
-                    <button class="link login-coding"><span class="icon icon-coding icon-coding-01"></span></button>
-                    <button class="link login-github"><span class="icon icon-github icon-39"></span></button>
-                    <button class="link login-weibo"><span class="icon icon-weibo icon-56"></span></button>
+                    <button class="link coding"><span class="wd-icon icon-coding-01"></span></button>
+                    <button class="link github"><span class="wd-icon icon-39"></span></button>
+                    <button class="link weibo"><span class="wd-icon icon-56"></span></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script src="https://img.wdstatic.cn/www-nd/scripts/jq.670de40a.js"></script>
-<script src="js/loginab.ca36a175.js"></script>
+<script src="./js/register-varab.149a336b.js"></script>
 <script type="text/javascript">
-    wd.login.init();
+    wd.signup.init();
 </script>
 <!-- Google Tag Manager -->
 <script>
@@ -190,7 +146,3 @@
 </body>
 
 </html>
-
-
-
-

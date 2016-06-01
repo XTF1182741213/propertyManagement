@@ -1,5 +1,7 @@
 package com.ilovecl.web;
 
+import com.ilovecl.entity.Repair;
+import com.ilovecl.service.RepairService;
 import com.ilovecl.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * 用户的web层
@@ -40,9 +44,17 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private RepairService repairService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         return "student/index";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(Model model) {
+        return "/student/register";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -50,8 +62,18 @@ public class StudentController {
         return "/student/login";
     }
 
-    @RequestMapping(value = "/board", method = RequestMethod.GET)
+    @RequestMapping(value = "/commit", method = RequestMethod.GET)
+    public String commit(Model model) {
+        return "/student/commit";
+    }
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String board(Model model) {
+        List<Repair> repairs = repairService.getRepqirByStudentId(1);
+
+        model.addAttribute("list", repairs);
+
         return "/student/dashboard";
+//        return "redirect:/studentDashboard";
     }
 }
