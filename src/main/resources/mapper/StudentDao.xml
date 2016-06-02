@@ -7,6 +7,10 @@
         SELECT * FROM student WHERE id = #{id}
     </select>
 
+    <select id="queryByEmail" resultType="Student">
+        SELECT * FROM student WHERE email = #{email}
+    </select>
+
     <select id="queryByName" resultType="Student">
         SELECT * FROM student WHERE name = #{name}
     </select>

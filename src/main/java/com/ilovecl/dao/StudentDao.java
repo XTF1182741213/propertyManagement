@@ -15,6 +15,9 @@ public interface StudentDao {
     //    根据ID查询
     Student queryById(int id);
 
+    //    根据邮箱查询
+    Student queryByEmail(String email);
+
     //    根据名字查询
     Student queryByName(String name);
 

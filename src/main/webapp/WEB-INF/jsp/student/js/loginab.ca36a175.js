@@ -587,15 +587,15 @@ wd.login.init = function () {
             }
             else if (data.resultInfo == "invalid password") {
                 $("#login-btn").removeAttr("disabled"), warnings.eq(1).text("密码错误").addClass("warning-password-show")
-            } else {
+            } else
+            // ，登录验证通过，自动跳转到主页面
+                window.location.href = "/student/dashboard";
+            // window.location.href("/student/dashboard");
 
-                alert("登录成功: " + data.name + "\n");
-
-                var f = b.code;
-                0 == f ? ("undefined" != typeof mixpanel && (mixpanel.identify(a), mixpanel.people.set({$email: a})), setTimeout(function () {
-                    window.location.href = d
-                }, 500)) : 1 == f && ($("#login-btn").removeAttr("disabled"), warnings.eq(1).text("Email或密码错误").addClass("warning-password-show"))
-            }
+            var f = b.code;
+            0 == f ? ("undefined" != typeof mixpanel && (mixpanel.identify(a), mixpanel.people.set({$email: a})), setTimeout(function () {
+                window.location.href = d
+            }, 500)) : 1 == f && ($("#login-btn").removeAttr("disabled"), warnings.eq(1).text("Email或密码错误").addClass("warning-password-show"))
         },
         error: function () {
             alert("fail\n");

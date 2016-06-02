@@ -16,6 +16,13 @@ public interface StudentService {
     /********************************学生端的接口*************************************************************/
 
     /**
+     * 根据email查询学生
+     * @param email
+     * @return
+     */
+    Student getStudentByEmail(String email);
+
+    /**
      * 修改密码
      *
      * @param studentId 对应的学生的编号ID

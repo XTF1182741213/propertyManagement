@@ -14,8 +14,13 @@
                     <li class="menu-item menu-item1"><a href="/" class="menu-link">管理面板</a></li>
                     <li class="menu-item menu-item2"><a href="/overview/introduction" class="menu-link">系统介绍</a>
                     </li>
-                    <li class="menu-item menu-item3"><a href="/questions" class="menu-link">邱永臣</a></li>
-                    <li class="menu-item menu-item4"><a href="/video" class="menu-link">退出</a></li>
+                    <li class="menu-item menu-item3"><a href="/questions" class="menu-link">
+                        名字
+
+
+                    </a></li>
+                    <li class="menu-item menu-item4"><a href="<c:url value="/student/logout"/>" class="menu-link">退出</a>
+                    </li>
                     <!--  <li class="menu-item menu-item5"><a href="https://www.wilddog.com/my-account/login" class="menu-link menu-link-login">登录</a></li>
                     <li class="menu-item menu-item6"><a href="https://www.wilddog.com/my-account/signup" class="menu-link btn-org-full">注册</a></li>-->
                 </ul>
@@ -38,3 +43,4 @@
         </button>
     </div>
 </div>
+

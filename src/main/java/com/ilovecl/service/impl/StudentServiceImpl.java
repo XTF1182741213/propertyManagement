@@ -36,6 +36,17 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     /**
+     * 根据email查询学生
+     *
+     * @param email
+     * @return
+     */
+    @Override
+    public Student getStudentByEmail(String email) {
+        return studentDao.queryByEmail(email);
+    }
+
+    /**
      * 修改密码
      *
      * @param studentId 对应的学生的编号ID
