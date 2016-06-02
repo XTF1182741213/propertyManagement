@@ -123,6 +123,11 @@
                         </fieldset>
                     </form>
 
+                    <form method="post" action="<c:url value="/student/commit"/>" enctype="multipart/form-data">
+                        <input type="text" name="name"/>
+                        <input type="file" name="file"/>
+                        <input type="submit"/>
+                    </form>
                 </div>
             </section>
         </div>
@@ -174,4 +179,19 @@
 <!-- End Google Tag Manager -->
 </body>
 
+
+<script>
+    function comitBtn() {
+        $.ajax({
+            url: "/student/commit",
+            method: "POST",
+            fileElementId: "img",
+            dataType: "json",
+            contentType: "json",
+            success: function () {
+                alert("nothing");
+            }
+        });
+    }
+</script>
 </html>

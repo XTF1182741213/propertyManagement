@@ -13,11 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -137,6 +141,44 @@ public class StudentController {
      */
     @RequestMapping(value = "/commit", method = RequestMethod.GET)
     public String commit(Model model) {
+        return "/student/commit";
+    }
+
+    @RequestMapping(value = "/commit", method = RequestMethod.POST)
+    public String commit(@RequestParam("name") String name,
+                         @RequestParam("file") MultipartFile file, HttpServletRequest httpServletRequest) {
+
+        logger.info(name);
+        try {
+            logger.info(file.getInputStream().toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String path = httpServletRequest.getSession().getServletContext().getRealPath("upload");
+        System.out.println("图片路径：" + path);
+        String fileName = file.getOriginalFilename();
+        File targetFile = new File(path, fileName);
+        try {
+            InputStream inputStream = file.getInputStream();
+
+            OutputStream outputStream = new FileOutputStream(targetFile);
+
+            byte[] buffer = new byte[2048];
+
+            int len = 0;
+
+            while ((len = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, len);
+            }
+
+            inputStream.close();
+            outputStream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return "/student/commit";
     }
 
