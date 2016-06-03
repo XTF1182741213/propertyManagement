@@ -6,15 +6,14 @@ import com.ilovecl.entity.Repair;
 import com.ilovecl.entity.Student;
 import com.ilovecl.service.RepairService;
 import com.ilovecl.service.StudentService;
+import com.ilovecl.service.UrgentRepairService;
+import com.ilovecl.util.MD5;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -57,6 +56,9 @@ public class StudentController {
 
     @Autowired
     private RepairService repairService;
+
+    @Autowired
+    private UrgentRepairService urgentRepairService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -145,38 +147,55 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/commit", method = RequestMethod.POST)
-    public String commit(@RequestParam("name") String name,
+    public String commit(@RequestParam("detail") String detail, @RequestParam("place") String place,
                          @RequestParam("file") MultipartFile file, HttpServletRequest httpServletRequest) {
 
-        logger.info(name);
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        String picMD5 = "";
+
+        logger.info(detail);
+        logger.info(place);
+        logger.info(picMD5);
         try {
             logger.info(file.getInputStream().toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        String path = httpServletRequest.getSession().getServletContext().getRealPath("upload");
-        System.out.println("图片路径：" + path);
-        String fileName = file.getOriginalFilename();
-        File targetFile = new File(path, fileName);
-        try {
-            InputStream inputStream = file.getInputStream();
-
-            OutputStream outputStream = new FileOutputStream(targetFile);
-
-            byte[] buffer = new byte[2048];
-
-            int len = 0;
-
-            while ((len = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, len);
+        if (file != null) {
+            try {
+                picMD5 = MD5.getMD5(email + String.valueOf(System.currentTimeMillis()) + file.getOriginalFilename());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            inputStream.close();
-            outputStream.close();
+            // 往数据库中插入维修单记录
+            repairService.submitRepair(detail, place, picMD5, student.getId());
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            // 保存现场照片
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/");
+            System.out.println("图片路径：" + path);
+            String fileName = picMD5;
+            File targetFile = new File(path, fileName);
+            try {
+                InputStream inputStream = file.getInputStream();
+                OutputStream outputStream = new FileOutputStream(targetFile);
+                byte[] buffer = new byte[2048];
+                int len = 0;
+                while ((len = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, len);
+                }
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // 往数据库中插入维修单记录
+            repairService.submitRepair(detail, place, picMD5, student.getId());
         }
 
         return "/student/commit";
@@ -189,11 +208,142 @@ public class StudentController {
      * @return
      */
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String board(Model model) {
-        List<Repair> repairs = repairService.getRepqirByStudentId(1);
+    public String board(Model model, HttpServletRequest httpServletRequest) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        List<Repair> repairs = repairService.getRepqirByStudentId(student.getId());
 
         model.addAttribute("list", repairs);
 
         return "/student/dashboard";
+    }
+
+    /**
+     * 报修单详情
+     *
+     * @param repairId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/repair/{repairId}/detail", method = RequestMethod.GET)
+    public String detail(@PathVariable("repairId") int repairId, Model model) {
+        Repair repair = repairService.getRepairById(repairId);
+        model.addAttribute("repair", repair);
+        return "student/detail";
+    }
+
+    /**
+     * 删除报修单
+     *
+     * @param repairId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/repair/{repairId}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable("repairId") int repairId, Model model) {
+        repairService.deleteRepair(repairId);
+        return "redirect:/student/dashboard";
+    }
+
+    /**
+     * 修改报修单
+     *
+     * @param repairId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/repair/{repairId}/update", method = RequestMethod.GET)
+    public String update(@PathVariable("repairId") int repairId, Model model) {
+        Repair repair = repairService.getRepairById(repairId);
+        model.addAttribute("repair", repair);
+        return "/student/update";
+    }
+
+    /**
+     * 修改报修单
+     *
+     * @return
+     */
+    @RequestMapping(value = "/repair/{repairId}/update", method = RequestMethod.POST)
+    public String update(@PathVariable("repairId") int repairId, @RequestParam("detail") String detail, @RequestParam("place") String place,
+                         @RequestParam("file") MultipartFile file, HttpServletRequest httpServletRequest) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        int id = repairId;
+
+        Repair repair = repairService.getRepairById(id);
+
+        String picMD5 = "";
+
+        logger.info(detail);
+        logger.info(place);
+        logger.info(picMD5);
+
+        if (file != null) {
+            try {
+                picMD5 = MD5.getMD5(email + String.valueOf(System.currentTimeMillis()) + file.getOriginalFilename());
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("*************************************************");
+            }
+
+            // 保存现场照片
+            String path = httpServletRequest.getSession().getServletContext().getRealPath("/");
+            System.out.println("图片路径：" + path);
+            String fileName = picMD5;
+            File targetFile = new File(path, fileName);
+            try {
+                OutputStream outputStream = new FileOutputStream(targetFile);
+                InputStream inputStream = file.getInputStream();
+                byte[] buffer = new byte[2048];
+                int len = 0;
+                while ((len = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, len);
+                }
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // 调用修改报修单接口
+        repairService.changeRepair(id, detail, place, picMD5);
+
+        return "redirect:/student/repair/" + String.valueOf(id) + "/detail";
+    }
+
+    /**
+     * 验收报修单
+     *
+     * @param repairId
+     * @return
+     */
+    @RequestMapping(value = "/repair/{repairId}/acceptance", method = RequestMethod.GET)
+    public String acceptance(@PathVariable("repairId") int repairId) {
+        repairService.Acceptance(repairId);
+        return "redirect:/student/repair/" + String.valueOf(repairId) + "/detail";
+    }
+
+    /**
+     * 将报修单标记为报修单
+     *
+     * @param repairId
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping(value = "/repair/{repairId}/urgent", method = RequestMethod.GET)
+    public String urgent(@PathVariable("repairId") int repairId, HttpServletRequest httpServletRequest) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        urgentRepairService.submitUrgentRepair(repairId, student.getId());
+
+        return "redirect:/student/dashboard";
     }
 }

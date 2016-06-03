@@ -54,13 +54,17 @@
                 </ul>
             </li>
             <li class="category ">
-                <div class="category-title"><a href="/student/">催单</a></div>
+                <div class="category-title"><a href="<c:url value="/student/urgent"/>">催单</a></div>
                 <ul class="pages">
+                    <li class="page  active"><a href="<c:url value="/student/urgent"/>" class="unvisited">查看</a>
+                    </li>
                 </ul>
             </li>
             <li class="category ">
-                <div class="category-title"><a href="/student/">待取消报修单</a></div>
+                <div class="category-title"><a href="<c:url value="/student/tobecanceled"/>">待取消报修单</a></div>
                 <ul class="pages">
+                    <li class="page  active"><a href="<c:url value="/student/tobecanceled"/>" class="unvisited">查看</a>
+                    </li>
                 </ul>
             </li>
             <div class="searchbar">
@@ -122,16 +126,16 @@
                                     <fmt:formatDate value="${r.submitTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger" href="/repair/${r.id}/detail">删除</a>
+                                    <a class="btn btn-danger" href="/student/repair/${r.id}/detail">删除</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning" href="/repair/${r.id}/detail">修改</a>
+                                    <a class="btn btn-warning" href="/student/repair/${r.id}/detail">修改</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary" href="/repair/${r.id}/detail">验收</a>
+                                    <a class="btn btn-primary" href="/student/repair/${r.id}/detail">验收</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-link" href="/repair/${r.id}/detail">详情</a>
+                                    <a class="btn btn-link" href="/student/repair/${r.id}/detail">详情</a>
                                 </td>
                             </tr>
                         </c:forEach>

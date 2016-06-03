@@ -50,18 +50,22 @@
                 <ul class="pages">
                     <li class="page "><a href="<c:url value="/student/dashboard"/>" class="unvisited">查看</a>
                     </li>
-                    <li class="page active "><a href="<c:url value="/student/commit"/>" class="unvisited">提交</a>
+                    <li class="page active"><a href="<c:url value="/student/commit"/>" class="unvisited">提交</a>
                     </li>
                 </ul>
             </li>
             <li class="category ">
-                <div class="category-title"><a href="/student/">催单</a></div>
+                <div class="category-title"><a href="<c:url value="/student/urgent"/>">催单</a></div>
                 <ul class="pages">
+                    <li class="page  active"><a href="<c:url value="/student/urgent"/>" class="unvisited">查看</a>
+                    </li>
                 </ul>
             </li>
             <li class="category ">
-                <div class="category-title"><a href="/student/">待取消报修单</a></div>
+                <div class="category-title"><a href="<c:url value="/student/tobecanceled"/>">待取消报修单</a></div>
                 <ul class="pages">
+                    <li class="page  active"><a href="<c:url value="/student/tobecanceled"/>" class="unvisited">查看</a>
+                    </li>
                 </ul>
             </li>
             <div class="searchbar">
@@ -82,12 +86,15 @@
 
                 <div class="content-text">
 
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post" action="<c:url value="/student/commit"/>"
+                          enctype="multipart/form-data">
                         <fieldset>
                             <div id="legend" class="">
                                 <legend class="">表单名</legend>
                             </div>
 
+
+                            <INPUT type=hidden name="id" value=${repair.id}>
 
                             <div class="control-group">
 
@@ -95,7 +102,7 @@
                                 <label class="control-label">故障详情</label>
                                 <div class="controls">
                                     <div class="textarea">
-                                        <textarea type="" class=""> </textarea>
+                                        <textarea type="text" class="" name="detail" title=""> </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -103,9 +110,10 @@
                             <div class="control-group">
 
                                 <!-- Text input-->
-                                <label class="control-label" for="input01">故障地点</label>
+                                <label class="control-label" for="place">故障地点</label>
                                 <div class="controls">
-                                    <input type="text" placeholder="尽可能详细地描述发生故障物业的地点" class="input-xlarge">
+                                    <input type="text" name="place" placeholder="尽可能详细地描述发生故障物业的地点"
+                                           class="input-xlarge">
                                     <p class="help-block"></p>
                                 </div>
                             </div>
@@ -116,18 +124,15 @@
 
                                 <!-- File Upload -->
                                 <div class="controls">
-                                    <input class="input-file" id="fileInput" type="file">
+                                    <input class="input-file" name="file" type="file">
                                 </div>
                             </div>
+
+                            <input type="submit" title="hi"/>
 
                         </fieldset>
                     </form>
 
-                    <form method="post" action="<c:url value="/student/commit"/>" enctype="multipart/form-data">
-                        <input type="text" name="name"/>
-                        <input type="file" name="file"/>
-                        <input type="submit"/>
-                    </form>
                 </div>
             </section>
         </div>
