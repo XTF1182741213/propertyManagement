@@ -1,3 +1,4 @@
+<%@ page import="com.ilovecl._const.StudentConst" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="header-bg">
     <div class="container rm-l-p rm-r-p">
@@ -15,8 +16,30 @@
                     <li class="menu-item menu-item2"><a href="/overview/introduction" class="menu-link">系统介绍</a>
                     </li>
                     <li class="menu-item menu-item3"><a href="/questions" class="menu-link">
-                        名字
+                        <%--定义JSP中的全局变量name--%>
+                        <%!
+                            String name;
+                        %>
+                        <%--寻找cookie内容并赋值给全局变量name--%>
+                        <%
+                            Cookie cookie = null;
+                            Cookie[] cookies = null;
 
+                            cookies = request.getCookies();
+                            if (cookies != null) {
+                                for (Cookie cooky : cookies) {
+                                    if (cooky.getName().equals(StudentConst.STUDENT_NAME)) {
+                                        System.out.println(cooky.getName() + " : " + cooky.getValue());
+                                        name = cooky.getValue();
+                                        break;
+                                    }
+                                }
+                            } else {
+                                System.out.println("cookie为空！！！！！");
+                            }
+                        %>
+                        <%--html引用全局变量name的值--%>
+                        <%=name%>
 
                     </a></li>
                     <li class="menu-item menu-item4"><a href="<c:url value="/student/logout"/>" class="menu-link">退出</a>
