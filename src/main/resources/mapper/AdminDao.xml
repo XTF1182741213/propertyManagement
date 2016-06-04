@@ -11,6 +11,10 @@
         SELECT * FROM admin WHERE userName = #{userName}
     </select>
 
+    <select id="queryByEmail" resultType="Admin">
+        SELECT * FROM admin WHERE email = #{email}
+    </select>
+
     <select id="queryAll" resultSets="List" resultType="Admin">
         SELECT * FROM admin
     </select>

@@ -1,9 +1,13 @@
 package com.ilovecl.web;
 
+import com.ilovecl._const.RepairEnumCN;
 import com.ilovecl._const.StudentConst;
 import com.ilovecl.dto.LoginResult;
+import com.ilovecl.dto.RepairDisplayer;
+import com.ilovecl.dto.StudentUrgentResult;
 import com.ilovecl.entity.Repair;
 import com.ilovecl.entity.Student;
+import com.ilovecl.entity.UrgentRepair;
 import com.ilovecl.service.RepairService;
 import com.ilovecl.service.StudentService;
 import com.ilovecl.service.UrgentRepairService;
@@ -21,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -123,6 +128,25 @@ public class StudentController {
         return loginResult;
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    LoginResult register(String email, String password, HttpSession httpSession, HttpServletResponse httpServletResponse) {
+
+        LoginResult loginResult;
+
+        Student student = studentService.getStudentByEmail(email);
+
+        if (student != null) {
+            loginResult = new LoginResult(false, "用户已存在");
+        } else {
+            studentService.addStudent(email, password, 0, email, "13800");
+            loginResult = new LoginResult(true, "true");
+        }
+
+        return loginResult;
+    }
+
     /**
      * 退出的控制
      *
@@ -130,9 +154,9 @@ public class StudentController {
      * @return
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    String logout(HttpSession httpSession) {
+    public String logout(HttpSession httpSession) {
         httpSession.removeAttribute(StudentConst.STUDENT_EMAIL);
-        return "redirect:/index";
+        return "redirect:/student/login";
     }
 
     /**
@@ -215,7 +239,16 @@ public class StudentController {
 
         List<Repair> repairs = repairService.getRepqirByStudentId(student.getId());
 
-        model.addAttribute("list", repairs);
+        List<RepairDisplayer> repairDisplayers = new ArrayList<RepairDisplayer>();
+
+        for (Repair r :
+                repairs) {
+            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).toString(),
+                    r.getDetail(), r.getPlace(), "/" + r.getPicMD5(), r.getSubmitTime(), r.getStudentId(), student.getName(),
+                    student.getEmail(), student));
+        }
+
+        model.addAttribute("list", repairDisplayers);
 
         return "/student/dashboard";
     }
@@ -230,7 +263,10 @@ public class StudentController {
     @RequestMapping(value = "/repair/{repairId}/detail", method = RequestMethod.GET)
     public String detail(@PathVariable("repairId") int repairId, Model model) {
         Repair repair = repairService.getRepairById(repairId);
-        model.addAttribute("repair", repair);
+        repair.setPicMD5("/" + repair.getPicMD5());
+        RepairDisplayer repairDisplayer = new RepairDisplayer(repair.getId(), repair.getStatus(), RepairEnumCN.stateOf(repair.getStatus()).toString(),
+                repair.getDetail(), repair.getPlace(), repair.getPicMD5(), repair.getSubmitTime());
+        model.addAttribute("repair", repairDisplayer);
         return "student/detail";
     }
 
@@ -345,5 +381,197 @@ public class StudentController {
         urgentRepairService.submitUrgentRepair(repairId, student.getId());
 
         return "redirect:/student/dashboard";
+    }
+
+    /**
+     * 查看所有的催单
+     *
+     * @param httpServletRequest
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/urgent", method = RequestMethod.GET)
+    public String showUrgent(HttpServletRequest httpServletRequest, Model model) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        List<UrgentRepair> urgentRepairs = urgentRepairService.getAllUrgentRepairByStudentId(student.getId());
+
+        List<StudentUrgentResult> studentUrgentResults = new ArrayList<StudentUrgentResult>();
+
+        String detail = "";
+        for (UrgentRepair urgentRepair : urgentRepairs) {
+            detail = repairService.getRepairById(urgentRepair.getRepairId()).getDetail();
+            studentUrgentResults.add(new StudentUrgentResult(
+                    urgentRepair.getId(), urgentRepair.getStatus(), RepairEnumCN.stateOf(urgentRepair.getStatus()).toString(),
+                    urgentRepair.getRepairId(), detail, urgentRepair.getStudentId(), urgentRepair.getCreateTime()));
+        }
+        model.addAttribute("studentUrgentResults", studentUrgentResults);
+
+        return "student/urgent";
+    }
+
+    /**
+     * 删除某条催单
+     *
+     * @param repairId
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping(value = "/urgent/{repairId}/delete", method = RequestMethod.GET)
+    public String deleteUrgent(@PathVariable("repairId") int repairId, HttpServletRequest httpServletRequest) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        urgentRepairService.submitUrgentRepair(repairId, student.getId());
+
+        return "redirect:/student/urgent";
+    }
+
+    /**
+     * 重新提交某条催单
+     *
+     * @param repairId
+     * @return
+     */
+    @RequestMapping(value = "/urgent/{repairId}/resubmit", method = RequestMethod.GET)
+    public String reSubmitUrgent(@PathVariable("repairId") int repairId) {
+
+        urgentRepairService.reSubmit(repairId);
+
+        return "redirect:/student/urgent";
+    }
+
+    /**
+     * 获取所有待取消的报修单
+     *
+     * @param httpServletRequest
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/tobecanceled", method = RequestMethod.GET)
+    public String toBeCanceled(HttpServletRequest httpServletRequest, Model model) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        List<Repair> repairs = repairService.getAllToBeCanceledById(student.getId());
+
+        List<RepairDisplayer> repairDisplayers = new ArrayList<RepairDisplayer>();
+
+        for (Repair r :
+                repairs) {
+            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).toString(),
+                    r.getDetail(), r.getPlace(), "/" + r.getPicMD5(), r.getSubmitTime(), r.getStudentId(), student.getName(),
+                    student.getEmail(), student));
+        }
+        model.addAttribute("repairs", repairDisplayers);
+
+        return "student/tobecanceled";
+
+    }
+
+    /**
+     * 同意取消报修单
+     *
+     * @param repairId
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping(value = "/tobecanceled/{repairId}/agree", method = RequestMethod.GET)
+    public String agreeCanceled(@PathVariable("repairId") int repairId, HttpServletRequest httpServletRequest) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        repairService.agreeToBeCanceled(repairId);
+
+        return "redirect:/student/tobecanceled";
+    }
+
+    /**
+     * 拒绝取消报修单
+     *
+     * @param repairId
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping(value = "/tobecanceled/{repairId}/reject", method = RequestMethod.GET)
+    public String rejectCanceled(@PathVariable("repairId") int repairId, HttpServletRequest httpServletRequest) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        repairService.rejectToBeCanceled(repairId);
+
+        return "redirect:/student/tobecanceled";
+    }
+
+    /**
+     * 获取个人信息的控制器
+     *
+     * @param httpServletRequest
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public String infomation(HttpServletRequest httpServletRequest, Model model) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        model.addAttribute("student", student);
+
+        return "student/info";
+    }
+
+    /**
+     * 修改密码的控制器
+     *
+     * @param password
+     * @param httpSession
+     * @param httpServletResponse
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping(value = "/changepassword", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    LoginResult changePassword(String password, HttpSession httpSession, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        studentService.changePassword(student.getId(), password);
+
+        return new LoginResult(true);
+    }
+
+    /**
+     * 修改其它资料
+     *
+     * @param name
+     * @param phone
+     * @param sexual
+     * @param httpSession
+     * @param httpServletResponse
+     * @param httpServletRequest
+     * @return
+     */
+    @RequestMapping(value = "/changeinfo", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    LoginResult changeInfo(String name, String phone, String sexual, HttpSession httpSession, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
+        String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
+
+        Student student = studentService.getStudentByEmail(email);
+
+        studentService.changeOtherInfo(student.getId(), Integer.valueOf(sexual), name, phone);
+
+        httpServletResponse.addCookie(new Cookie(StudentConst.STUDENT_NAME, student.getName()));
+
+        return new LoginResult(true);
     }
 }

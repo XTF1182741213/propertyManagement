@@ -49,10 +49,10 @@ public class LoginServiceImpl implements LoginService {
         return new LoginResult(false);
     }
 
-    public LoginResult adminLogin(String name, String password) {
+    public LoginResult adminLogin(String email, String password) {
         // 用户存在，而且密码正确，才允许登录
-        if (adminDao.queryByName(name) != null &&
-                adminDao.queryByName(name).getPassword().equals(password)) {
+        if (adminDao.queryByEmail(email) != null &&
+                adminDao.queryByEmail(email).getPassword().equals(password)) {
             return new LoginResult(true);
         }
 

@@ -163,7 +163,7 @@
         </div>
     </div>
 </div>
-<script src="https://img.wdstatic.cn/www-nd/scripts/jq.670de40a.js"></script>
+<script src="./js/jq.670de40a.js"></script>
 <script src="./js/loginab.ca36a175.js"></script>
 <script type="text/javascript">
     wd.login.init();

@@ -20,4 +20,6 @@ public interface AdminDao {
 
     //    查询所有管理员
     List<Admin> queryAll();
+
+    Admin queryByEmail(String email);
 }

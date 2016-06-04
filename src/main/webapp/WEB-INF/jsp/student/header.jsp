@@ -4,18 +4,19 @@
     <div class="container rm-l-p rm-r-p">
         <div class="header">
             <div class="col-md-2 col-md-offset-0 rm-l-p rm-r-p header-logo">
-                <a href="https://www.wilddog.com/">
+                <a href="http://www.ilovecl.com/">
                     <img src="icon/redleaf.png" alt="红叶" class="wd-logo" width="175" height="35">
                 </a>
             </div>
             <div class="col-md-10  rm-l-p rm-r-p header-right">
                 <ul class="header-menu">
-                    <li class="menu-item menu-item-index"><a href="/"
+                    <li class="menu-item menu-item-index"><a href="<c:url value="/student/dashboard"/>"
                                                              class="menu-link">红叶物业报修系统</a></li>
-                    <li class="menu-item menu-item1"><a href="/" class="menu-link">管理面板</a></li>
-                    <li class="menu-item menu-item2"><a href="/overview/introduction" class="menu-link">系统介绍</a>
+                    <li class="menu-item menu-item1"><a href="<c:url value="/student/dashboard"/>" class="menu-link">管理面板</a>
                     </li>
-                    <li class="menu-item menu-item3"><a href="/questions" class="menu-link">
+                    <li class="menu-item menu-item2"><a href="<c:url value="/index"/>" class="menu-link">系统介绍</a>
+                    </li>
+                    <li class="menu-item menu-item3"><a href="<c:url value="/student/info"/>" class="menu-link">
                         <%--定义JSP中的全局变量name--%>
                         <%!
                             String name;

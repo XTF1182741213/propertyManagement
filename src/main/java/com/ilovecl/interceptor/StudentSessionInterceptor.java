@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 登录验证的拦截器
+ * 学生登录验证的拦截器
  *
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn

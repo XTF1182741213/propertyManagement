@@ -77,13 +77,6 @@
                     <span class="warning text-center"></span>
                 </div>
                 <div class="register-input-group">
-                    <p class="input-title">名字： </p>
-                    <div class="input-fill">
-                        <input type="text" class="email-signup " required="required">
-                    </div>
-                    <span class="warning text-center"></span>
-                </div>
-                <div class="register-input-group">
                     <p class="input-title">密码： </p>
                     <div class="input-fill">
                         <input type="password" class="email-signup password">
@@ -117,7 +110,7 @@
         </div>
     </div>
 </div>
-<script src="https://img.wdstatic.cn/www-nd/scripts/jq.670de40a.js"></script>
+<script src="./js//jq.670de40a.js"></script>
 <script src="./js/register-varab.149a336b.js"></script>
 <script type="text/javascript">
     wd.signup.init();

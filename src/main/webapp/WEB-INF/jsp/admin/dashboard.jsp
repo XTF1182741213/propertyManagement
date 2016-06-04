@@ -42,28 +42,47 @@
     <%--引入页面头部--%>
     <%@include file="header.jsp" %>
 
+
     <div class="container main-body">
         <div class="col-md-2 menu">
             <li class="category  active">
-                <div class="category-title"><a href="<c:url value="/student/dashboard"/>">报修单</a></div>
+                <div class="category-title"><a href="<c:url value="/admin/dashboard"/>">报修单</a></div>
                 <ul class="pages">
-                    <li class="page  active"><a href="<c:url value="/student/dashboard"/>" class="unvisited">查看</a>
+                    <li class="page  active"><a href="<c:url value="/admin/dashboard"/>" class="unvisited">查看未完成</a>
                     </li>
-                    <li class="page "><a href="<c:url value="/student/commit"/>" class="unvisited">提交</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="category ">
-                <div class="category-title"><a href="<c:url value="/student/urgent"/>">催单</a></div>
-                <ul class="pages">
-                    <li class="page  active"><a href="<c:url value="/student/urgent"/>" class="unvisited">查看</a>
+                    <li class="page "><a href="<c:url value="/admin/finish"/>" class="unvisited">查看已完成</a>
                     </li>
                 </ul>
             </li>
             <li class="category ">
-                <div class="category-title"><a href="<c:url value="/student/tobecanceled"/>">待取消报修单</a></div>
+                <div class="category-title"><a href="<c:url value="/admin/urgent"/>">催单</a></div>
                 <ul class="pages">
-                    <li class="page  active"><a href="<c:url value="/student/tobecanceled"/>" class="unvisited">查看</a>
+                    <li class="page  active"><a href="<c:url value="/admin/urgent"/>" class="unvisited">查看</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="category  ">
+                <div class="category-title"><a href="<c:url value="/admin/arrage"/>">维修安排</a></div>
+                <ul class="pages">
+                    <li class="page  active"><a href="<c:url value="/admin/arrage"/>" class="unvisited">查看</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="category ">
+                <div class="category-title"><a href="<c:url value="/admin/student"/>">学生管理</a></div>
+                <ul class="pages">
+                    <li class="page  active"><a href="<c:url value="/admin/student"/>" class="unvisited">查看</a>
+                    </li>
+                    <li class="page  active"><a href="<c:url value="/admin/addstudent"/>" class="unvisited">添加</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="category ">
+                <div class="category-title"><a href="<c:url value="/admin/technician"/>">维修人员管理</a></div>
+                <ul class="pages">
+                    <li class="page  active"><a href="<c:url value="/admin/technician"/>" class="unvisited">查看</a>
+                    </li>
+                    <li class="page  active"><a href="<c:url value="/admin/addtechnician"/>" class="unvisited">添加</a>
                     </li>
                 </ul>
             </li>
@@ -110,7 +129,13 @@
                             <th>详情</th>
                             <th>地点</th>
                             <th>提交时间</th>
-                            <th>查看详情</th>
+                            <th>提交人</th>
+                            <th></th>
+                            详情
+                        </tr>
+                        <%--<th>取消</th>--%>
+                        <%--<th>确认</th>--%>
+                        <%--<th>检修</th>--%>
                         </tr>
                         </thead>
                         <tbody>
@@ -122,9 +147,19 @@
                                 <td>
                                     <fmt:formatDate value="${r.submitTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
+                                <td>${r.studentName}</td>
                                 <td>
-                                    <a class="btn btn-link" href="/student/repair/${r.id}/detail">详情</a>
+                                    <a class="btn btn-link" href="/admin/repair/${r.id}/detail">详情</a>
                                 </td>
+                                    <%--<td>--%>
+                                    <%--<a class="btn btn-link" href="/admin/repair/${r.id}/cancel">取消</a>--%>
+                                    <%--</td>--%>
+                                    <%--<td>--%>
+                                    <%--<a class="btn btn-link" href="/admin/repair/${r.id}/confirm">确认</a>--%>
+                                    <%--</td>--%>
+                                    <%--<td>--%>
+                                    <%--<a class="btn btn-link" href="/admin/repair/${r.id}/arrange">检修</a>--%>
+                                    <%--</td>--%>
                             </tr>
                         </c:forEach>
                         </tbody>

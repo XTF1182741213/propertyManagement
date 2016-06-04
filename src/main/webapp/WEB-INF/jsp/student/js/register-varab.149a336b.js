@@ -29,17 +29,23 @@ wd.signup = wd.signup || {}, wd.signup.init = function () {
 }, wd.signup.doSignup = function () {
     var a = $(".email-input").val(), b = $(".password").val();
     return wd.util.validateEmail(a) ? wd.util.validatePassword(b) ? ($("#register-btn").addClass("disabled"), "undefined" != typeof mixpanel && mixpanel.register_once({$email: a}), void $.ajax({
-        url: "https://www.wilddog.com/account/signup",
+        url: "/student/register",
         type: "POST",
         data: {email: a, password: b},
         cache: !1,
         timeout: 3e4,
         dataType: "json",
-        success: function (b, c) {
-            var d = b.code;
-            0 == d ? ("undefined" != typeof mixpanel && (mixpanel.alias(a), mixpanel.people.set({$email: a})), setTimeout(function () {
-                window.location.href = "https://www.wilddog.com/dashboard?from=signup"
-            }, 1e3), goog_report_conversion("https://www.wilddog.com/dashboard?from=signup")) : 1 == d ? ($(".warning").eq(0).text("请输入有效的 Email 地址").addClass("warning-show"), $(".email-input").addClass("warning-border")) : 2 == d ? ($(".warning").eq(1).text("请输入至少8位的字符作为密码").addClass("warning-show"), $(".password").addClass("warning-border")) : 3 == d ? ($(".warning").eq(0).text("Email已注册").addClass("warning-show"), $(".email-input").addClass("warning-border")) : 10 == d && ($(".warning").eq(0).text("当前IP注册过于频繁，请10分后再试").addClass("warning-show-long"), $(".email-input").addClass("warning-border")), $("#register-btn").removeClass("disabled")
+        success: function (data) {
+            var d = data.code;
+
+            if (data.reason == "true") {
+                alert("注册成功");
+                window.location.href = "/student/login";
+            } else {
+                alert("注册失败" + b.toArray());
+                window.location.href = "/student/register";
+            }
+            
         },
         error: function () {
             $("#register-btn").removeClass("disabled")

@@ -15,5 +15,5 @@ public interface LoginService {
     LoginResult studentLogin(String name, String password);
 
     //    管理员登录的接口
-    LoginResult adminLogin(String name, String password);
+    LoginResult adminLogin(String email, String password);
 }

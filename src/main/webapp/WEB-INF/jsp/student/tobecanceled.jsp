@@ -3,8 +3,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 邱永臣
-  Date: 2016-06-01
-  Time: 15:26
+  Date: 2016-6-3
+  Time: 14:53
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -44,10 +44,10 @@
 
     <div class="container main-body">
         <div class="col-md-2 menu">
-            <li class="category  active">
+            <li class="category  ">
                 <div class="category-title"><a href="<c:url value="/student/dashboard"/>">报修单</a></div>
                 <ul class="pages">
-                    <li class="page  active"><a href="<c:url value="/student/dashboard"/>" class="unvisited">查看</a>
+                    <li class="page  "><a href="<c:url value="/student/dashboard"/>" class="unvisited">查看</a>
                     </li>
                     <li class="page "><a href="<c:url value="/student/commit"/>" class="unvisited">提交</a>
                     </li>
@@ -56,11 +56,11 @@
             <li class="category ">
                 <div class="category-title"><a href="<c:url value="/student/urgent"/>">催单</a></div>
                 <ul class="pages">
-                    <li class="page  active"><a href="<c:url value="/student/urgent"/>" class="unvisited">查看</a>
+                    <li class="page  "><a href="<c:url value="/student/urgent"/>" class="unvisited">查看</a>
                     </li>
                 </ul>
             </li>
-            <li class="category ">
+            <li class="category active">
                 <div class="category-title"><a href="<c:url value="/student/tobecanceled"/>">待取消报修单</a></div>
                 <ul class="pages">
                     <li class="page  active"><a href="<c:url value="/student/tobecanceled"/>" class="unvisited">查看</a>
@@ -89,7 +89,7 @@
             <%--</div>--%>
             <%--</div>--%>
             <section class="content">
-                <h1> 所有报修单 </h1>
+                <h1> 所有待取消的报修单 </h1>
                 <div class="func pull-right">
 
                     <%--<div>asd</div>--%>
@@ -110,11 +110,12 @@
                             <th>详情</th>
                             <th>地点</th>
                             <th>提交时间</th>
-                            <th>查看详情</th>
+                            <th>同意取消</th>
+                            <th>拒绝取消</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="r" items="${list}">
+                        <c:forEach var="r" items="${repairs}">
                             <tr>
                                 <td>${r.statusInfo}</td>
                                 <td>${r.detail}</td>
@@ -124,6 +125,12 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-link" href="/student/repair/${r.id}/detail">详情</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="/student/tobecanceled/${r.id}/agree">同意</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-warning" href="/student/tobecanceled/${r.id}/reject">拒绝</a>
                                 </td>
                             </tr>
                         </c:forEach>

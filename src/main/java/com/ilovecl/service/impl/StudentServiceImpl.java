@@ -36,6 +36,17 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     /**
+     * 根据id查询学生
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Student getStudentById(int id) {
+        return studentDao.queryById(id);
+    }
+
+    /**
      * 根据email查询学生
      *
      * @param email
@@ -71,11 +82,11 @@ public class StudentServiceImpl implements StudentService {
      * 修改除了名字和密码之外的信息
      *
      * @param sexual
-     * @param email
+     * @param name
      * @param phone
      * @return
      */
-    public boolean changeOtherInfo(int studentId, int sexual, String email, String phone) {
+    public boolean changeOtherInfo(int studentId, int sexual, String name, String phone) {
         Student student = studentDao.queryById(studentId);
 
         // 根本不存在该用户
@@ -83,7 +94,7 @@ public class StudentServiceImpl implements StudentService {
             return false;
 
         student.setSexual(sexual);
-        student.setEmail(email);
+        student.setName(name);
         student.setPhone(phone);
 
         studentDao.update(student);

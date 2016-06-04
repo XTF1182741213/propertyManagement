@@ -1,7 +1,7 @@
-package com.ilovecl.dto;
+package com.ilovecl._const;
 
 /**
- * 登录接口的返回封装数据
+ * 报修单的状态，中文版
  *
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
@@ -19,43 +19,42 @@ package com.ilovecl.dto;
  *         WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
  *         OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * @since 2016-05-30 18:21
+ * @since 2016-06-04 3:11
  */
-public class LoginResult {
-    //    是否登录成功
-    private boolean isSuccess;
-    private String reason;
+public enum RepairEnumCN {
+    DELETED_BY_STUDENT(0, "被学生删除"),
+    REPAIR_UN_ARRANGED(1, "未安排检修"),
+    REPAIR_ARRANGED(2, "已安排检修"),
+    CANCELED_AGREE_WAIT(3, "待学生确认取消"),
+    CANCELED_AGREE(4, "学生同意取消"),
+    CANCELED_REJECT(5, "学生拒绝取消"),
+    CONFIRM_WAIT(6, "等待验收"),
+    CONFIRM(7, "已验收");
 
-    public LoginResult(boolean isSuccess) {
-        this.isSuccess = isSuccess;
+    private int state;
+    private String stateInfo;
+
+    RepairEnumCN(int state, String stateInfo) {
+        this.state = state;
+        this.stateInfo = stateInfo;
     }
 
-    public LoginResult(boolean isSuccess, String reason) {
-        this.isSuccess = isSuccess;
-        this.reason = reason;
+    public static RepairEnumCN stateOf(int index) {
+        for (RepairEnumCN state : values()) {
+            if ((state.getState() == index)) {
+                return state;
+            }
+        }
+
+        return null;
     }
 
-    public String getReason() {
-        return reason;
+    public int getState() {
+        return state;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public String getStateInfo() {
+        return stateInfo;
     }
-
-    public boolean isSuccess() {
-        return isSuccess;
-    }
-
-    public void setSuccess(boolean success) {
-        isSuccess = success;
-    }
-
-    @Override
-    public String toString() {
-        return "登录结果：" + String.valueOf(isSuccess);
-    }
-
-    //    Session数据
 
 }

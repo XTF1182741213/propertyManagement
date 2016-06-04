@@ -29,12 +29,12 @@ CREATE TABLE student (
 CREATE TABLE admin (
   `id`       INT         NOT NULL AUTO_INCREMENT
   COMMENT '编号ID',
-  `userName` VARCHAR(50) NOT NULL
+  `email`    VARCHAR(50) NOT NULL
   COMMENT '用户名',
   `password` VARCHAR(50) NOT NULL
   COMMENT '密码',
   PRIMARY KEY (id),
-  KEY (userName)
+  KEY (email)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8

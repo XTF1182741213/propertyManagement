@@ -1,7 +1,15 @@
-package com.ilovecl.dto;
+package com.ilovecl.interceptor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * 登录接口的返回封装数据
+ * 系统管理员登录验证拦截器
  *
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
@@ -19,43 +27,28 @@ package com.ilovecl.dto;
  *         WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
  *         OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * @since 2016-05-30 18:21
+ * @since 2016-06-04 21:56
  */
-public class LoginResult {
-    //    是否登录成功
-    private boolean isSuccess;
-    private String reason;
+public class AdminSessionInterceptor implements HandlerInterceptor {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public LoginResult(boolean isSuccess) {
-        this.isSuccess = isSuccess;
-    }
-
-    public LoginResult(boolean isSuccess, String reason) {
-        this.isSuccess = isSuccess;
-        this.reason = reason;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public boolean isSuccess() {
-        return isSuccess;
-    }
-
-    public void setSuccess(boolean success) {
-        isSuccess = success;
+    @Override
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        Object email = httpServletRequest.getSession().getAttribute("ADMIN_EMAIL");
+        if (email == null) {
+            logger.info("管理员尚未登录，将其重定向至登录页面");
+            httpServletResponse.sendRedirect("/admin/login");
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public String toString() {
-        return "登录结果：" + String.valueOf(isSuccess);
+    public void postHandle(HttpServletRequest hsr, HttpServletResponse hsr1, Object o, ModelAndView mav) throws Exception {
     }
 
-    //    Session数据
+    @Override
+    public void afterCompletion(HttpServletRequest hsr, HttpServletResponse hsr1, Object o, Exception excptn) throws Exception {
+    }
 
 }

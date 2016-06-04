@@ -16,6 +16,13 @@ public interface StudentService {
     /********************************学生端的接口*************************************************************/
 
     /**
+     * 根据id查询学生
+     * @param id
+     * @return
+     */
+    Student getStudentById(int id);
+
+    /**
      * 根据email查询学生
      * @param email
      * @return
@@ -32,14 +39,14 @@ public interface StudentService {
     boolean changePassword(int studentId, String password);
 
     /**
-     * 修改除了名字和密码之外的信息
+     * 修改除了邮箱和密码之外的信息
      *
      * @param sexual
-     * @param email
+     * @param name
      * @param phone
      * @return
      */
-    boolean changeOtherInfo(int studentId, int sexual, String email, String phone);
+    boolean changeOtherInfo(int studentId, int sexual, String name, String phone);
 
     /********************************管理员端的接口*************************************************************/
 

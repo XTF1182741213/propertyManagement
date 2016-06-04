@@ -44,12 +44,21 @@
                 </div>
                 <div class="span8">
                     <button class="btn btn-link btn-block" type="button"><a href="/student/dashboard">返回上一级</a></button>
-                    <button class="btn btn-block btn-link" type="button"><a href="/student/repair/${repair.id}/delete">删除</a>
+                    <button class="btn btn-block btn-link" type="button"><a href="/admin/repair/${r.id}/cancel">取消</a>
                     </button>
-                    <button class="btn btn-block btn-link" type="button"><a href="/student/repair/${repair.id}/update">修改</a>
+                    <button class="btn btn-block btn-link" type="button"><a href="/admin/repair/${r.id}/confirm">确认</a>
                     </button>
-                    <button class="btn btn-block btn-link" type="button"><a href="/student/repair/${repair.id}/urgent">催单</a>
+                    <button class="btn btn-block btn-link" type="button"><a href="/admin/repair/${r.id}/arrange">检修</a>
                     </button>
+                    <%--<td>--%>
+                    <%--<a class="btn btn-link" href="/admin/repair/${r.id}/cancel">取消</a>--%>
+                    <%--</td>--%>
+                    <%--<td>--%>
+                    <%--<a class="btn btn-link" href="/admin/repair/${r.id}/confirm">确认</a>--%>
+                    <%--</td>--%>
+                    <%--<td>--%>
+                    <%--<a class="btn btn-link" href="/admin/repair/${r.id}/arrange">检修</a>--%>
+                    <%--</td>--%>
                     <button class="btn btn-block btn-link" type="button"><a
                             href="/student/repair/${repair.id}/acceptance">验收</a></button>
                 </div>
@@ -71,6 +80,12 @@
                     </h2>
                     <p>
                         ${repair.submitTime}
+                    </p>
+                    <h2>
+                        提交人
+                    </h2>
+                    <p>
+                        ${repair.studentName}
                     </p>
                 </div>
                 <div class="span2">
