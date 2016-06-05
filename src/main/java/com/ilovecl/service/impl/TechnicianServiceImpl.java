@@ -36,6 +36,17 @@ public class TechnicianServiceImpl implements TechnicianService {
     private TechnicianDao technicianDao;
 
     /**
+     * 根据报修单获取维修人员
+     *
+     * @param technicianId
+     * @return
+     */
+    @Override
+    public Technician getById(int technicianId) {
+        return technicianDao.queryById(technicianId);
+    }
+
+    /**
      * 获取所有维修人员
      *
      * @return

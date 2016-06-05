@@ -44,11 +44,14 @@
                 </div>
                 <div class="span8">
                     <button class="btn btn-link btn-block" type="button"><a href="/student/dashboard">返回上一级</a></button>
-                    <button class="btn btn-block btn-link" type="button"><a href="/admin/repair/${r.id}/cancel">取消</a>
+                    <button class="btn btn-block btn-link" type="button"><a
+                            href="/admin/repair/${repair.id}/cancel">取消</a>
                     </button>
-                    <button class="btn btn-block btn-link" type="button"><a href="/admin/repair/${r.id}/confirm">确认</a>
+                    <button class="btn btn-block btn-link" type="button"><a
+                            href="/admin/repair/${repair.id}/confirm">确认</a>
                     </button>
-                    <button class="btn btn-block btn-link" type="button"><a href="/admin/repair/${r.id}/arrange">检修</a>
+                    <button class="btn btn-block btn-link" type="button"><a
+                            href="/admin/repair/${repair.id}/arrange">检修</a>
                     </button>
                     <%--<td>--%>
                     <%--<a class="btn btn-link" href="/admin/repair/${r.id}/cancel">取消</a>--%>

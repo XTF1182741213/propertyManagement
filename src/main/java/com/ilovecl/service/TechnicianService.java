@@ -14,6 +14,13 @@ import java.util.List;
 public interface TechnicianService {
 
     /**
+     * 根据报修单获取维修人员
+     * @param technicianId
+     * @return
+     */
+    Technician getById(int technicianId);
+
+    /**
      * 获取所有维修人员
      *
      * @return

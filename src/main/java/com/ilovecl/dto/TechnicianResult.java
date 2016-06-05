@@ -1,7 +1,8 @@
-package com.ilovecl.entity;
+package com.ilovecl.dto;
 
 /**
- * 维修人员
+ * 维修人员的返回结果
+ *
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
  *         copyRight:The MIT License (MIT)
@@ -18,30 +19,7 @@ package com.ilovecl.entity;
  *         WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
  *         OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * @since 2016-05-29 14:48
+ * @since 2016-06-05 16:22
  */
-public class Technician {
-    private int id; // 编号
-    private String name; // 姓名
-
-    public Technician(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+public class TechnicianResult {
 }

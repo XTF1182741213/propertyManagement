@@ -1,9 +1,10 @@
-package com.ilovecl.entity;
+package com.ilovecl.dto;
 
 import java.sql.Timestamp;
 
 /**
- * 维修记录
+ * 维修记录的返回结果
+ *
  * @author qiuyongchen
  *         email:qiuych3@mail2.sysu.edu.cn
  *         copyRight:The MIT License (MIT)
@@ -20,37 +21,26 @@ import java.sql.Timestamp;
  *         WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
  *         OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  *         OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * @since 2016-05-29 14:48
+ * @since 2016-06-05 14:54
  */
-public class Maintenance {
+public class MaintenanceResult {
     private int id; // 维修记录编号
+
     private int repairId; // 维修记录对应的报修单的编号
+    private String repairDetail; // 维修记录对应的报修单的详情
+
     private int technicianId; // 维修人员的编号
+    private String technicianName; // 维修人员的名字
+
     private Timestamp startTime; // 维修记录发起的时间
 
-    public Maintenance(int id) {
-        this.id = id;
-    }
-
-    public Maintenance(Integer id, int repairId, Integer technicianId, Timestamp startTime) {
+    public MaintenanceResult(int id, int repairId, String repairDetail, int technicianId, String technicianName, Timestamp startTime) {
         this.id = id;
         this.repairId = repairId;
+        this.repairDetail = repairDetail;
         this.technicianId = technicianId;
+        this.technicianName = technicianName;
         this.startTime = startTime;
-    }
-
-    public Maintenance(Integer repairId, Integer technicianId, Timestamp startTime) {
-        this.repairId = repairId;
-        this.technicianId = technicianId;
-        this.startTime = startTime;
-    }
-
-    public int getTechnicianId() {
-        return technicianId;
-    }
-
-    public void setTechnicianId(int technicianId) {
-        this.technicianId = technicianId;
     }
 
     public int getId() {
@@ -67,6 +57,30 @@ public class Maintenance {
 
     public void setRepairId(int repairId) {
         this.repairId = repairId;
+    }
+
+    public String getRepairDetail() {
+        return repairDetail;
+    }
+
+    public void setRepairDetail(String repairDetail) {
+        this.repairDetail = repairDetail;
+    }
+
+    public int getTechnicianId() {
+        return technicianId;
+    }
+
+    public void setTechnicianId(int technicianId) {
+        this.technicianId = technicianId;
+    }
+
+    public String getTechnicianName() {
+        return technicianName;
+    }
+
+    public void setTechnicianName(String technicianName) {
+        this.technicianName = technicianName;
     }
 
     public Timestamp getStartTime() {
