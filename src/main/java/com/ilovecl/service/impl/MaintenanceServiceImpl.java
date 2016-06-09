@@ -33,7 +33,12 @@ import java.util.List;
 public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Autowired
-    private MaintenanceDao maintenanceDao;
+    public MaintenanceDao maintenanceDao;
+
+    @Override
+    public Maintenance getById(int id) {
+        return maintenanceDao.queryById(id);
+    }
 
     /**
      * 获取所有的维修安排
@@ -54,5 +59,10 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         maintenanceDao.delete(new Maintenance(id));
 
         return true;
+    }
+
+    @Override
+    public Maintenance getByRepairId(int repairId) {
+        return maintenanceDao.queryByRepairId(repairId);
     }
 }

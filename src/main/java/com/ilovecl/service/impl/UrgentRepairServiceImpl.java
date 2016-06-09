@@ -1,8 +1,10 @@
 package com.ilovecl.service.impl;
 
+import com.ilovecl._const.RepairEnum;
 import com.ilovecl._const.UrgentRepairEnum;
 import com.ilovecl.dao.RepairDao;
 import com.ilovecl.dao.UrgentRepairDao;
+import com.ilovecl.entity.Repair;
 import com.ilovecl.entity.UrgentRepair;
 import com.ilovecl.service.UrgentRepairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,9 @@ public class UrgentRepairServiceImpl implements UrgentRepairService {
     @Autowired
     private RepairDao repairDao;
 
+    @Autowired
+    private RepairServiceImpl repairService;
+
     /**
      * 提交催单
      *
@@ -52,9 +57,20 @@ public class UrgentRepairServiceImpl implements UrgentRepairService {
      */
     public boolean submitUrgentRepair(int repairId, int studentId) {
 
-        // 已经存在该报修单的催单
-        if (urgentRepairDao.queryByRepairId(repairId) != null)
+        Repair repair = repairDao.queryById(repairId);
+
+        if (repair.getStatus() == RepairEnum.DELETED_BY_STUDENT.getState()
+                || repair.getStatus() == RepairEnum.CONFIRM.getState()
+                || repair.getStatus() == RepairEnum.CANCELED_AGREE.getState()) {
+            System.out.println("状态不对，不允许提交催单");
             return false;
+        }
+
+        // 已经存在该报修单的催单
+        if (urgentRepairDao.queryByRepairId(repairId) != null) {
+            this.reSubmit(repairId);
+            return false;
+        }
 
         urgentRepairDao.add(new UrgentRepair(
                 UrgentRepairEnum.CHECK_WAIT.getState(), repairId, studentId,
@@ -72,9 +88,12 @@ public class UrgentRepairServiceImpl implements UrgentRepairService {
     public boolean deleteUrgentRepair(int repairId) {
         UrgentRepair urgentRepair = urgentRepairDao.queryByRepairId(repairId);
 
+        if (urgentRepair == null)
+            return false;
+
         urgentRepair.setStatus(UrgentRepairEnum.CANCELED_BY_STUDENT.getState());
 
-        urgentRepairDao.update(urgentRepair);
+        urgentRepairDao.delete(urgentRepair);
 
         return true;
     }
@@ -94,8 +113,10 @@ public class UrgentRepairServiceImpl implements UrgentRepairService {
 
         // 重置创建催单的时间
         urgentRepair.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        // 重置状态
+        urgentRepair.setStatus(UrgentRepairEnum.CHECK_WAIT.getState());
 
-        urgentRepairDao.add(urgentRepair);
+        urgentRepairDao.update(urgentRepair);
 
         return true;
     }
@@ -103,16 +124,22 @@ public class UrgentRepairServiceImpl implements UrgentRepairService {
     /**
      * 获取某位学生提交的催单
      *
-     * @param studentId
      * @return 所有催单
      */
     public List<UrgentRepair> getAllUrgentRepairByStudentId(int studentId) {
         List<UrgentRepair> urgentRepairs = urgentRepairDao.queryByStudentId(studentId);
 
+        Repair repair = null;
+
         List<UrgentRepair> list = new ArrayList<UrgentRepair>();
 
         for (UrgentRepair urgentRepair : urgentRepairs) {
-            if (urgentRepair.getStatus() != UrgentRepairEnum.CANCELED_BY_STUDENT.getState())
+            repair = repairService.getRepairById(urgentRepair.getRepairId());
+
+            if (urgentRepair.getStatus() != UrgentRepairEnum.CANCELED_BY_STUDENT.getState()
+                    && repair.getStatus() != RepairEnum.DELETED_BY_STUDENT.getState()
+                    && repair.getStatus() != RepairEnum.CONFIRM.getState()
+                    && repair.getStatus() != RepairEnum.CANCELED_AGREE.getState())
                 list.add(urgentRepair);
         }
 
@@ -127,10 +154,17 @@ public class UrgentRepairServiceImpl implements UrgentRepairService {
     public List<UrgentRepair> getAllUrgentRepair() {
         List<UrgentRepair> urgentRepairs = urgentRepairDao.queryAll();
 
+        Repair repair = null;
+
         List<UrgentRepair> list = new ArrayList<UrgentRepair>();
 
         for (UrgentRepair urgentRepair : urgentRepairs) {
-            if (urgentRepair.getStatus() == UrgentRepairEnum.CHECK_WAIT.getState())
+            repair = repairService.getRepairById(urgentRepair.getRepairId());
+
+            if (urgentRepair.getStatus() == UrgentRepairEnum.CHECK_WAIT.getState()
+                    && repair.getStatus() != RepairEnum.DELETED_BY_STUDENT.getState()
+                    && repair.getStatus() != RepairEnum.CONFIRM.getState()
+                    && repair.getStatus() != RepairEnum.CANCELED_AGREE.getState())
                 list.add(urgentRepair);
         }
 
@@ -145,6 +179,11 @@ public class UrgentRepairServiceImpl implements UrgentRepairService {
      */
     public boolean checkUrgentRepair(int repairId) {
         UrgentRepair urgentRepair = urgentRepairDao.queryByRepairId(repairId);
+
+        // 未处在待查看的状态
+        if (urgentRepair.getStatus() != UrgentRepairEnum.CHECK_WAIT.getState()) {
+            return false;
+        }
 
         urgentRepair.setStatus(UrgentRepairEnum.CHECK.getState());
 

@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
+    <title>报修单详情</title>
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -43,15 +43,15 @@
                 <div class="span2">
                 </div>
                 <div class="span8">
-                    <button class="btn btn-link btn-block" type="button"><a href="/student/dashboard">返回上一级</a></button>
+                    <button class="btn btn-link btn-block" type="button"><a href="/admin/dashboard">返回上一级</a></button>
                     <button class="btn btn-block btn-link" type="button"><a
-                            href="/admin/repair/${repair.id}/cancel">取消</a>
+                            href="/admin/repair/${repair.id}/cancel">取消该报修单</a>
                     </button>
                     <button class="btn btn-block btn-link" type="button"><a
-                            href="/admin/repair/${repair.id}/confirm">确认</a>
+                            href="/admin/repair/${repair.id}/confirm">确认检修完毕</a>
                     </button>
                     <button class="btn btn-block btn-link" type="button"><a
-                            href="/admin/repair/${repair.id}/arrange">检修</a>
+                            href="/admin/repair/${repair.id}/arrange">安排检修</a>
                     </button>
                     <%--<td>--%>
                     <%--<a class="btn btn-link" href="/admin/repair/${r.id}/cancel">取消</a>--%>
@@ -62,8 +62,6 @@
                     <%--<td>--%>
                     <%--<a class="btn btn-link" href="/admin/repair/${r.id}/arrange">检修</a>--%>
                     <%--</td>--%>
-                    <button class="btn btn-block btn-link" type="button"><a
-                            href="/student/repair/${repair.id}/acceptance">验收</a></button>
                 </div>
                 <div class="span2">
                 </div>

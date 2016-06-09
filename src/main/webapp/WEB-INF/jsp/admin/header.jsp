@@ -4,7 +4,7 @@
         <div class="header">
             <div class="col-md-2 col-md-offset-0 rm-l-p rm-r-p header-logo">
                 <a href="http://www.ilovecl.com/">
-                    <img src="icon/redleaf.png" alt="红叶" class="wd-logo" width="175" height="35">
+                    <img src="/admin/icon/redleaf.png" alt="红叶" class="wd-logo" width="175" height="35">
                 </a>
             </div>
             <div class="col-md-10  rm-l-p rm-r-p header-right">

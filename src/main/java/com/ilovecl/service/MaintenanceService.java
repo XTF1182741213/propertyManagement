@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface MaintenanceService {
 
+    Maintenance getById(int id);
+
     /**
      * 获取所有的维修安排
      *
@@ -28,4 +30,5 @@ public interface MaintenanceService {
      */
     boolean cancelMaintenance(int id);
 
+    Maintenance getByRepairId(int repairId);
 }

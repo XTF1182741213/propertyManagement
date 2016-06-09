@@ -62,9 +62,9 @@
                 </ul>
             </li>
             <li class="category  active">
-                <div class="category-title"><a href="<c:url value="/admin/arrage"/>">维修安排</a></div>
+                <div class="category-title"><a href="<c:url value="/admin/arrange"/>">维修安排</a></div>
                 <ul class="pages">
-                    <li class="page  active"><a href="<c:url value="/admin/arrage"/>" class="unvisited">查看</a>
+                    <li class="page  active"><a href="<c:url value="/admin/arrange"/>" class="unvisited">查看</a>
                     </li>
                 </ul>
             </li>

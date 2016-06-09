@@ -7,6 +7,8 @@ import com.ilovecl.dto.ModifyRepairResult;
 import com.ilovecl.entity.Maintenance;
 import com.ilovecl.entity.Repair;
 import com.ilovecl.service.RepairService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,10 +41,10 @@ import java.util.List;
 public class RepairServiceImpl implements RepairService {
 
     @Autowired
-    private RepairDao repairDao;
-
+    public RepairDao repairDao;
     @Autowired
-    private MaintenanceDao maintenanceDao;
+    public MaintenanceDao maintenanceDao;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public Repair getRepairById(int repairId) {
         return repairDao.queryById(repairId);
@@ -115,6 +117,14 @@ public class RepairServiceImpl implements RepairService {
     public ModifyRepairResult deleteRepair(int id) {
         Repair repair = repairDao.queryById(id);
 
+        if (repair.getStatus() == RepairEnum.DELETED_BY_STUDENT.getState()) {
+            return new ModifyRepairResult(false, "已删除的报修单不能再次被删除");
+        }
+
+        if (repair.getStatus() == RepairEnum.CONFIRM_WAIT.getState()) {
+            return new ModifyRepairResult(false, "处于待验收的状态，必须先验收才能删除");
+        }
+
         repair.setStatus(RepairEnum.DELETED_BY_STUDENT.getState());
 
         repairDao.update(repair);
@@ -130,6 +140,10 @@ public class RepairServiceImpl implements RepairService {
      */
     public ModifyRepairResult Acceptance(int id) {
         Repair repair = repairDao.queryById(id);
+
+        if (repair.getStatus() != RepairEnum.CONFIRM_WAIT.getState()) {
+            return new ModifyRepairResult(false, "未处于待验收的状态，不能验收");
+        }
 
         repair.setStatus(RepairEnum.CONFIRM.getState());
 
@@ -165,6 +179,11 @@ public class RepairServiceImpl implements RepairService {
     public void agreeToBeCanceled(int id) {
         Repair repair = repairDao.queryById(id);
 
+        if (repair.getStatus() != RepairEnum.CANCELED_AGREE_WAIT.getState()) {
+            logger.info("该报修单并未“等待同意取消”，所以不能同意取消");
+            return;
+        }
+
         repair.setStatus(RepairEnum.CANCELED_AGREE.getState());
 
         repairDao.update(repair);
@@ -178,6 +197,11 @@ public class RepairServiceImpl implements RepairService {
      */
     public void rejectToBeCanceled(int id) {
         Repair repair = repairDao.queryById(id);
+
+        if (repair.getStatus() != RepairEnum.CANCELED_AGREE_WAIT.getState()) {
+            logger.info("该报修单并未“等待同意取消”，所以不能拒绝取消");
+            return;
+        }
 
         repair.setStatus(RepairEnum.CANCELED_REJECT.getState());
 
@@ -194,9 +218,13 @@ public class RepairServiceImpl implements RepairService {
 
         List<Repair> list = new ArrayList<Repair>();
 
+        // 1. 没被删除
+        // 2. 没验收
+        // 3. 没同意取消
         for (Repair repair : repairs) {
             if (repair.getStatus() != RepairEnum.DELETED_BY_STUDENT.getState()
-                    && repair.getStatus() != RepairEnum.CONFIRM.getState())
+                    && repair.getStatus() != RepairEnum.CONFIRM.getState()
+                    && repair.getStatus() != RepairEnum.CANCELED_AGREE.getState())
                 list.add(repair);
         }
 
@@ -229,9 +257,14 @@ public class RepairServiceImpl implements RepairService {
     public void cancelRepair(int id) {
         Repair repair = repairDao.queryById(id);
 
-        repair.setStatus(RepairEnum.CANCELED_AGREE_WAIT.getState());
+        if (repair.getStatus() != RepairEnum.DELETED_BY_STUDENT.getState()
+                && repair.getStatus() != RepairEnum.CONFIRM.getState()
+                && repair.getStatus() != RepairEnum.CANCELED_AGREE.getState()) {
 
-        repairDao.update(repair);
+            repair.setStatus(RepairEnum.CANCELED_AGREE_WAIT.getState());
+
+            repairDao.update(repair);
+        }
     }
 
     /**
@@ -243,11 +276,31 @@ public class RepairServiceImpl implements RepairService {
     public void arrangeRepair(int repairId, int technicianId) {
         Repair repair = repairDao.queryById(repairId);
 
+        if (maintenanceDao.queryByRepairId(repairId) != null) {
+            logger.info("已安排过，故需先删除之前的安排记录");
+            return;
+        }
+
+        maintenanceDao.add(new Maintenance(repairId, technicianId, new Timestamp(System.currentTimeMillis())));
+
         repair.setStatus(RepairEnum.REPAIR_ARRANGED.getState());
 
         repairDao.update(repair);
+    }
 
-        maintenanceDao.add(new Maintenance(repairId, technicianId, new Timestamp(System.currentTimeMillis())));
+    @Override
+    public void unArrangeRepair(int repairId) {
+        Repair repair = repairDao.queryById(repairId);
+
+        // 未处在“已安排检修”的状态，不能取消安排检修
+        if (repair.getStatus() != RepairEnum.REPAIR_ARRANGED.getState()) {
+            return;
+        }
+
+        repair.setStatus(RepairEnum.REPAIR_UN_ARRANGED.getState());
+
+        repairDao.update(repair);
+
     }
 
     /**
@@ -258,8 +311,12 @@ public class RepairServiceImpl implements RepairService {
     public void confirmRepair(int rapairId) {
         Repair repair = repairDao.queryById(rapairId);
 
-        repair.setStatus(RepairEnum.CONFIRM_WAIT.getState());
+        if (repair.getStatus() != RepairEnum.DELETED_BY_STUDENT.getState()
+                && repair.getStatus() != RepairEnum.CONFIRM.getState()
+                && repair.getStatus() != RepairEnum.CONFIRM.getState()) {
+            repair.setStatus(RepairEnum.CONFIRM_WAIT.getState());
 
-        repairDao.update(repair);
+            repairDao.update(repair);
+        }
     }
 }

@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>添加学生_红叶物业报修系统</title>
+    <title>添加维修人员_红叶物业报修系统</title>
     <meta name="keywords"
           content="wilddog, WildDog, realtime, PaaS, BaaS, HTMl5, CoAP, Thread, REST, Javascript, DTLS, websockets, realtime sync, UDP, JSON, developer, B2B, SDK, iOS, Android, Mac OS, Windows, 野狗, 野狗实时, 野狗云, 实时应用, 实时同步, 实时数据库, 跨平台, 物联网, 构建实时应用, 受限网络, 传感网, 解决方案, 云平台, 云计算, 云服务, 公有云, 私有云, 开发者">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -61,9 +61,9 @@
                 </ul>
             </li>
             <li class="category  ">
-                <div class="category-title"><a href="<c:url value="/admin/arrage"/>">维修安排</a></div>
+                <div class="category-title"><a href="<c:url value="/admin/arrange"/>">维修安排</a></div>
                 <ul class="pages">
-                    <li class="page  active"><a href="<c:url value="/admin/arrage"/>" class="unvisited">查看</a>
+                    <li class="page  active"><a href="<c:url value="/admin/arrange"/>" class="unvisited">查看</a>
                     </li>
                 </ul>
             </li>

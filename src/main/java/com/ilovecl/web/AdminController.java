@@ -1,6 +1,8 @@
 package com.ilovecl.web;
 
+import com.ilovecl._const.RepairEnum;
 import com.ilovecl._const.RepairEnumCN;
+import com.ilovecl._const.UrgentRepairEnum;
 import com.ilovecl.dto.*;
 import com.ilovecl.entity.*;
 import com.ilovecl.service.*;
@@ -104,7 +106,7 @@ public class AdminController {
                 repairs) {
             student = studentService.getStudentById(r.getStudentId());
 
-            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).toString(),
+            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).getStateInfo(),
                     r.getDetail(), r.getPlace(), "/" + r.getPicMD5(), r.getSubmitTime(), r.getStudentId(), student.getName(),
                     student.getEmail(), student));
         }
@@ -122,7 +124,7 @@ public class AdminController {
 
         repair.setPicMD5("/" + repair.getPicMD5());
 
-        RepairDisplayer repairDisplayer = new RepairDisplayer(repair.getId(), repair.getStatus(), RepairEnumCN.stateOf(repair.getStatus()).toString(),
+        RepairDisplayer repairDisplayer = new RepairDisplayer(repair.getId(), repair.getStatus(), RepairEnumCN.stateOf(repair.getStatus()).getStateInfo(),
                 repair.getDetail(), repair.getPlace(), repair.getPicMD5(), repair.getSubmitTime());
         model.addAttribute("repair", repairDisplayer);
         return "admin/detail";
@@ -137,12 +139,16 @@ public class AdminController {
     @RequestMapping(value = "/repair/{repairId}/confirm", method = RequestMethod.GET)
     public String confirmRepair(@PathVariable("repairId") int repairId) {
         repairService.confirmRepair(repairId);
+
         return "redirect:/admin/dashboard";
     }
 
     @RequestMapping(value = "/repair/{repairId}/arrange", method = RequestMethod.GET)
     public String arrangeRepair(@PathVariable("repairId") int repairId, Model model) {
         Repair repair = repairService.getRepairById(repairId);
+
+        if (repair.getStatus() == RepairEnum.REPAIR_ARRANGED.getState())
+            return "redirect:/admin/repair/" + String.valueOf(repairId) + "/detail";
 
         List<Technician> techniciens = technicianService.getAllTechnician();
 
@@ -152,10 +158,19 @@ public class AdminController {
         return "/admin/addArrange";
     }
 
-    @RequestMapping(value = "/technician/{repairId}/add", method = RequestMethod.POST)
-    public String submitArrange(@PathVariable("repairId") int repairId, @RequestParam("id") int id) {
+    @RequestMapping(value = "/maintenance/{repairId}/add", method = RequestMethod.POST)
+    public String submitArrange(@PathVariable("repairId") int repairId, @RequestParam("technicianId") String technicianId) {
 
-        repairService.arrangeRepair(repairId, id);
+        // 解决表单提交时乱码的问题(JSP在表单提交时默认采用ISO-8859-1编码)
+        try {
+            technicianId = new String(technicianId.getBytes("ISO-8859-1"), "utf8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("technicianId : " + technicianId);
+
+        repairService.arrangeRepair(repairId, Integer.valueOf(technicianId));
 
         return "redirect:/admin/dashboard";
     }
@@ -171,7 +186,7 @@ public class AdminController {
                 repairs) {
             student = studentService.getStudentById(r.getStudentId());
 
-            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).toString(),
+            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).getStateInfo(),
                     r.getDetail(), r.getPlace(), "/" + r.getPicMD5(), r.getSubmitTime(), r.getStudentId(), student.getName(),
                     student.getEmail(), student));
         }
@@ -197,7 +212,7 @@ public class AdminController {
             urgentRepairResults.add(
                     new UrgentRepairResult
                             (urgentRepair.getId(),
-                                    urgentRepair.getStatus(), RepairEnumCN.stateOf(urgentRepair.getStatus()).toString(),
+                                    urgentRepair.getStatus(), UrgentRepairEnum.stateOf(urgentRepair.getStatus()).getStateInfo(),
                                     urgentRepair.getRepairId(), repair.getDetail(),
                                     urgentRepair.getStudentId(), student.getName(),
                                     new Timestamp(System.currentTimeMillis())));
@@ -210,11 +225,11 @@ public class AdminController {
 
     @RequestMapping(value = "/urgent/{repairId}/delete", method = RequestMethod.GET)
     public String deleteUrgent(@PathVariable("repairId") int repairId) {
-        urgentRepairService.deleteUrgentRepair(repairId);
+        urgentRepairService.checkUrgentRepair(repairId);
         return "redirect:/admin/urgent";
     }
 
-    @RequestMapping(value = "/arrage", method = RequestMethod.GET)
+    @RequestMapping(value = "/arrange", method = RequestMethod.GET)
     public String arrange(Model model) {
         List<Maintenance> maintenances = maintenanceService.getAll();
 
@@ -224,7 +239,18 @@ public class AdminController {
         Technician technician;
 
         for (Maintenance maintenance : maintenances) {
+
             repair = repairService.getRepairById(maintenance.getRepairId());
+
+            // 以下状态的报修单对应的维修记录就没必要显示了
+            // 1. 被学生删除
+            // 2. 学生同意取消
+            // 3. 已经验收
+            if (repair.getStatus() == RepairEnum.DELETED_BY_STUDENT.getState()
+                    || repair.getStatus() == RepairEnum.CANCELED_AGREE.getState()
+                    || repair.getStatus() == RepairEnum.CONFIRM.getState())
+                continue;
+
             technician = technicianService.getById(maintenance.getTechnicianId());
             maintenanceResults.add(
                     new MaintenanceResult(
@@ -243,7 +269,14 @@ public class AdminController {
 
     @RequestMapping(value = "/arrange/{maintenanceId}/cancel", method = RequestMethod.GET)
     public String cancelArrange(@PathVariable("maintenanceId") int maintenanceId) {
+        Maintenance maintenance = maintenanceService.getById(maintenanceId);
+
+        // 删除检修安排记录
         maintenanceService.cancelMaintenance(maintenanceId);
+
+        // 同时也修改相应的维修单的状态
+        repairService.unArrangeRepair(maintenance.getRepairId());
+
         return "redirect:/admin/arrange";
     }
 

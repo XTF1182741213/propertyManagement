@@ -5,9 +5,9 @@ package com.ilovecl._const;
  * Created by 邱永臣 on 2016-05-31.
  */
 public enum UrgentRepairEnum {
-    CHECK_WAIT(0, "CHECK_WAIT"),
-    CHECK(1, "CHECK"),
-    CANCELED_BY_STUDENT(2, "CANCELED_BY_STUDENT");
+    CHECK_WAIT(0, "待管理员查看"),
+    CHECK(1, "管理员已查看"),
+    CANCELED_BY_STUDENT(2, "被学生取消");
 
     private int state;
     private String stateInfo;

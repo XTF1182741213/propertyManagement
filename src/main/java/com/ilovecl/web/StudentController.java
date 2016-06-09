@@ -2,8 +2,10 @@ package com.ilovecl.web;
 
 import com.ilovecl._const.RepairEnumCN;
 import com.ilovecl._const.StudentConst;
+import com.ilovecl._const.UrgentRepairEnum;
 import com.ilovecl.dto.LoginResult;
 import com.ilovecl.dto.RepairDisplayer;
+import com.ilovecl.dto.StudentResult;
 import com.ilovecl.dto.StudentUrgentResult;
 import com.ilovecl.entity.Repair;
 import com.ilovecl.entity.Student;
@@ -174,6 +176,14 @@ public class StudentController {
     public String commit(@RequestParam("detail") String detail, @RequestParam("place") String place,
                          @RequestParam("file") MultipartFile file, HttpServletRequest httpServletRequest) {
 
+        // 解决表单提交时乱码的问题(JSP在表单提交时默认采用ISO-8859-1编码)
+        try {
+            detail = new String(detail.getBytes("ISO-8859-1"), "utf8");
+            place = new String(place.getBytes("ISO-8859-1"), "utf8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
         String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
 
         Student student = studentService.getStudentByEmail(email);
@@ -243,7 +253,7 @@ public class StudentController {
 
         for (Repair r :
                 repairs) {
-            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).toString(),
+            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).getStateInfo(),
                     r.getDetail(), r.getPlace(), "/" + r.getPicMD5(), r.getSubmitTime(), r.getStudentId(), student.getName(),
                     student.getEmail(), student));
         }
@@ -264,7 +274,7 @@ public class StudentController {
     public String detail(@PathVariable("repairId") int repairId, Model model) {
         Repair repair = repairService.getRepairById(repairId);
         repair.setPicMD5("/" + repair.getPicMD5());
-        RepairDisplayer repairDisplayer = new RepairDisplayer(repair.getId(), repair.getStatus(), RepairEnumCN.stateOf(repair.getStatus()).toString(),
+        RepairDisplayer repairDisplayer = new RepairDisplayer(repair.getId(), repair.getStatus(), RepairEnumCN.stateOf(repair.getStatus()).getStateInfo(),
                 repair.getDetail(), repair.getPlace(), repair.getPicMD5(), repair.getSubmitTime());
         model.addAttribute("repair", repairDisplayer);
         return "student/detail";
@@ -305,13 +315,18 @@ public class StudentController {
     @RequestMapping(value = "/repair/{repairId}/update", method = RequestMethod.POST)
     public String update(@PathVariable("repairId") int repairId, @RequestParam("detail") String detail, @RequestParam("place") String place,
                          @RequestParam("file") MultipartFile file, HttpServletRequest httpServletRequest) {
+
+        // 解决表单提交时乱码的问题(JSP在表单提交时默认采用ISO-8859-1编码)
+        try {
+            detail = new String(detail.getBytes("ISO-8859-1"), "utf8");
+            place = new String(place.getBytes("ISO-8859-1"), "utf8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
         String email = httpServletRequest.getSession().getAttribute(StudentConst.STUDENT_EMAIL).toString();
 
-        Student student = studentService.getStudentByEmail(email);
-
         int id = repairId;
-
-        Repair repair = repairService.getRepairById(id);
 
         String picMD5 = "";
 
@@ -362,11 +377,11 @@ public class StudentController {
     @RequestMapping(value = "/repair/{repairId}/acceptance", method = RequestMethod.GET)
     public String acceptance(@PathVariable("repairId") int repairId) {
         repairService.Acceptance(repairId);
-        return "redirect:/student/repair/" + String.valueOf(repairId) + "/detail";
+        return "redirect:/student/dashboard";
     }
 
     /**
-     * 将报修单标记为报修单
+     * 将报修单标记为催单
      *
      * @param repairId
      * @param httpServletRequest
@@ -404,7 +419,7 @@ public class StudentController {
         for (UrgentRepair urgentRepair : urgentRepairs) {
             detail = repairService.getRepairById(urgentRepair.getRepairId()).getDetail();
             studentUrgentResults.add(new StudentUrgentResult(
-                    urgentRepair.getId(), urgentRepair.getStatus(), RepairEnumCN.stateOf(urgentRepair.getStatus()).toString(),
+                    urgentRepair.getId(), urgentRepair.getStatus(), UrgentRepairEnum.stateOf(urgentRepair.getStatus()).getStateInfo(),
                     urgentRepair.getRepairId(), detail, urgentRepair.getStudentId(), urgentRepair.getCreateTime()));
         }
         model.addAttribute("studentUrgentResults", studentUrgentResults);
@@ -425,7 +440,7 @@ public class StudentController {
 
         Student student = studentService.getStudentByEmail(email);
 
-        urgentRepairService.submitUrgentRepair(repairId, student.getId());
+        urgentRepairService.deleteUrgentRepair(repairId);
 
         return "redirect:/student/urgent";
     }
@@ -463,7 +478,7 @@ public class StudentController {
 
         for (Repair r :
                 repairs) {
-            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).toString(),
+            repairDisplayers.add(new RepairDisplayer(r.getId(), r.getStatus(), RepairEnumCN.stateOf(r.getStatus()).getStateInfo(),
                     r.getDetail(), r.getPlace(), "/" + r.getPicMD5(), r.getSubmitTime(), r.getStudentId(), student.getName(),
                     student.getEmail(), student));
         }
@@ -522,7 +537,11 @@ public class StudentController {
 
         Student student = studentService.getStudentByEmail(email);
 
-        model.addAttribute("student", student);
+        StudentResult studentResult = new StudentResult(
+                student.getId(), student.getName(), student.getPassword(),
+                student.getSexual(), student.getSexual() == 0 ? "男" : "女",
+                student.getEmail(), student.getPhone());
+        model.addAttribute("student", studentResult);
 
         return "student/info";
     }

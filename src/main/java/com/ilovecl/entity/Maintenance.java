@@ -32,7 +32,7 @@ public class Maintenance {
         this.id = id;
     }
 
-    public Maintenance(Integer id, int repairId, Integer technicianId, Timestamp startTime) {
+    public Maintenance(Integer id, Integer repairId, Integer technicianId, Timestamp startTime) {
         this.id = id;
         this.repairId = repairId;
         this.technicianId = technicianId;

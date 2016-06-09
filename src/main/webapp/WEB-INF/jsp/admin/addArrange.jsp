@@ -16,7 +16,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>红叶物业报修系统</title>
+    <title>安排维修_红叶物业报修系统</title>
     <meta name="keywords"
           content="wilddog, WildDog, realtime, PaaS, BaaS, HTMl5, CoAP, Thread, REST, Javascript, DTLS, websockets, realtime sync, UDP, JSON, developer, B2B, SDK, iOS, Android, Mac OS, Windows, 野狗, 野狗实时, 野狗云, 实时应用, 实时同步, 实时数据库, 跨平台, 物联网, 构建实时应用, 受限网络, 传感网, 解决方案, 云平台, 云计算, 云服务, 公有云, 私有云, 开发者">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -88,16 +88,17 @@
                 <p>报修单详情</p>
                 <p>${repair.detail}</p>
 
-                <form class="form-horizontal" method="post" action="<c:url value="/admin/technician/${repair.id}/add"/>"
+                <form class="form-horizontal" method="post"
+                      action="<c:url value="/admin/maintenance/${repair.id}/add"/>"
                       enctype="multipart/form-data">
                     <fieldset>
 
                         <div class="control-group">
 
                             <!-- Text input-->
-                            <label class="control-label" for="id">编号</label>
+                            <label class="control-label" for="technicianId">编号</label>
                             <div class="controls">
-                                <input type="text" name="id" placeholder="负责检修的维修人员编号"
+                                <input type="text" name="technicianId" placeholder="负责检修的维修人员编号"
                                        class="input-xlarge">
                                 <p class="help-block"></p>
                             </div>

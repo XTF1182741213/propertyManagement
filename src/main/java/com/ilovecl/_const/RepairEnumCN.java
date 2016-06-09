@@ -22,14 +22,14 @@ package com.ilovecl._const;
  * @since 2016-06-04 3:11
  */
 public enum RepairEnumCN {
-    DELETED_BY_STUDENT(0, "被学生删除"),
-    REPAIR_UN_ARRANGED(1, "未安排检修"),
-    REPAIR_ARRANGED(2, "已安排检修"),
-    CANCELED_AGREE_WAIT(3, "待学生确认取消"),
-    CANCELED_AGREE(4, "学生同意取消"),
-    CANCELED_REJECT(5, "学生拒绝取消"),
-    CONFIRM_WAIT(6, "等待验收"),
-    CONFIRM(7, "已验收");
+    DELETED_BY_STUDENT_CN(0, "被学生删除"),
+    REPAIR_UN_ARRANGED_CN(1, "未安排检修"),
+    REPAIR_ARRANGED_CN(2, "已安排检修"),
+    CANCELED_AGREE_WAIT_CN(3, "待学生确认取消"),
+    CANCELED_AGREE_CN(4, "学生同意取消"),
+    CANCELED_REJECT_CN(5, "学生拒绝取消"),
+    CONFIRM_WAIT_CN(6, "等待验收"),
+    CONFIRM_CN(7, "已验收");
 
     private int state;
     private String stateInfo;

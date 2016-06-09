@@ -117,6 +117,8 @@ public interface RepairService {
      */
     void arrangeRepair(int repairId, int technicianId);
 
+    void unArrangeRepair(int repairId);
+
     /**
      * 确认某报修单上的故障物业已经被维修人员修好
      *

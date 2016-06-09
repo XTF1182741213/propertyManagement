@@ -122,10 +122,10 @@
                                     <fmt:formatDate value="${r.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger" href="/student/urgent/${r.id}/delete">删除</a>
+                                    <a class="btn btn-danger" href="/student/urgent/${r.repairId}/delete">删除</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning" href="/student/urgent/${r.id}/resubmit">催单</a>
+                                    <a class="btn btn-warning" href="/student/urgent/${r.repairId}/resubmit">催单</a>
                                 </td>
                             </tr>
                         </c:forEach>

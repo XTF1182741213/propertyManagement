@@ -17,8 +17,8 @@
 
     <insert id="add" parameterType="Maintenance" useGeneratedKeys="true"
             keyProperty="id">
-        INSERT INTO maintenance (repairId, startTime)
-        VALUE (#{repairId}, #{startTime})
+        INSERT INTO maintenance (repairId, technicianId, startTime)
+        VALUE (#{repairId}, #{technicianId}, #{startTime})
     </insert>
 
     <delete id="delete" parameterType="Maintenance">
